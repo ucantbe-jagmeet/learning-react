@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  /*copy the link in the html section or @import in css file and using fonts familyy  here;*/
 }
 
 .heading{
@@ -21,7 +24,7 @@
 
 .img_div img
 {
+  margin-left: 10px;
   width: 250px;
   height: 300px;
-
 }

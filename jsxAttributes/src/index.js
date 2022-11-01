@@ -4,7 +4,7 @@ import ReactDOM  from "react-dom";
 
 const img1 = "https://picsum.photos/250/300";
 const img2 = "https://picsum.photos/150/300";
-const img3 = "https://picsum.photos/300/300";
+const img3 = "https://picsum.photos/400/300";
 const link = "https://www.youtube.com/";
 
 ReactDOM.render( 

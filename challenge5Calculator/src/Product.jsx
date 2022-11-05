@@ -1,5 +1,5 @@
 import React from 'react';
-import {a,b}from './Variables';
+import {a,b} from './Variables';
 
 function Product()
 {

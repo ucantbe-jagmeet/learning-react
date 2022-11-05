@@ -6,10 +6,12 @@ import Divide from "./Divide";
 
 function App()
 {
-    <Subtract/>;
-    <Divide/>;
-    <Product/>;
-    <Sum/>;        
+    return(
+        <Subtract/>,
+    <Divide/>,
+    <Product/>,
+    <Sum/>
+    );        
 }
 
 export default App;

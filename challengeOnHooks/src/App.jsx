@@ -5,22 +5,20 @@ import './index.css'
 const App = () => 
 {
    
-
-
-    const [todaysDate , setCount] = useState(Date());
+    let newTime = new Date().toLocaleTimeString();
+    const [timer ,setCtime] = useState(newTime);
     
-    const Fun = () => 
+    const updateTime = () => 
     {
-        // let td = new Date();
-        let time = Date.getTime();
-        setCount(time);
+        newTime = new Date().toLocaleTimeString();
+        setCtime(newTime);
     }
    
     
     return(
         <>
-            <h1>{todaysDate}</h1>
-            <button onClick={Fun} >GET TIME</button>
+            <h1>{timer}</h1>
+            <button onClick={updateTime} >GET TIME</button>
         </>
     );
 }

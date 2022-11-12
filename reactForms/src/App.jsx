@@ -3,29 +3,53 @@ import React, { useState }  from "react";
 
 const App =() =>
 {
-    // const purple = '#8e44ad';
-    const purple = "yellow";
-    const [bg , setBg] = useState(purple);
-    const [name1, setName] = useState('hello ji 😧')
-    const bgChange = () =>
+   
+    const [name1, setName] = useState('');
+    const [lastName ,setLastName] = useState('');
+    const [fullName ,setFullName] = useState('');
+    const [lastNameNew , setLastNewName] = useState('');
+
+    const inputEvent = (event) =>
     {
-        let color = 'orange';
-        setBg(color);
-        setName('okay bye 👍');     
+        console.log(event.target.value);
+        setName(event.target.value);
+    };
+    const inputEventTwo = (event) =>
+    {
+        console.log(event.target.value);
+        setLastName(event.target.value);
     };
 
-    const BgBack = () =>
+    const onSubmits = (e) =>
     {
-        setBg('blue');
-        setName('Ayyo!! 🎈');
+        e.preventDefault();
+        setFullName(name1);
+        setLastNewName(lastName);
     };
 
     return (
-        <>
-            <div className="container" style = {{backgroundColor: bg}}>
-                <button className="btn" onClick={bgChange} onDoubleClick={BgBack}>{name1}</button>
+    <>
+       <form onSubmit={onSubmits}>
+        <div className="container" >
+                <h1 className="header">Hello {fullName} {lastNameNew}</h1>
+                <input 
+                    className="content" 
+                    type='text' 
+                    placeholder='Enter Your First Name'
+                    onChange={inputEvent}
+                    value={name1}
+                />
+                <input 
+                    className="content" 
+                    type='text' 
+                    placeholder='Enter Your Second Name'
+                    onChange={inputEventTwo}
+                    value={lastName}
+                />
+                <button type="submit" className="btn" >Submit Me 👍</button>
             </div>
-        </>
+       </form>
+    </>
     );
 }
 

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=McLaren&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: rgb(193, 231, 218);
+  font-family: 'McLaren', cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container
+{
+  width:500px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header
+{
+  color: white;
+  text-shadow: 2px 2px 6px black;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.content
+{
+  width: 90%;
+  height: 5%;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  font-size: 13px;
+  outline: none;
+  color: #868686;
+  box-shadow: inset 1px 1px 10px 1px rgba(128, 128, 128, 0.356);
+}
+
+.content:focus
+{
+  color: #868686;
+}
+
+
+.btn
+{
+  width: 40%;
+  padding: 5px 10px 5px 10px;
+  border: 2px solid white;
+  border-radius: 8px;
+  background-color: rgba(35, 75, 185, 0.507);
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}

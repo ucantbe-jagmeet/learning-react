@@ -8,7 +8,8 @@ const App =() =>
         fname : '',
         lname : '',
         email : '',
-        phone : ''
+        phone : '',
+        quali : ''
     });
 
 
@@ -20,44 +21,47 @@ const App =() =>
         const {value , name } = event.target; // object destructoring
 
         setFullName((preValue) => {
-            // console.log(preValue);
-
-            if(name === 'fname')
-            {
-                return{
-                    fname : value,
-                    lname : preValue.lname,
-                    email : preValue.email,
-                    phone : preValue.phone
-                };
+            
+            return{
+                ...preValue,
+                [name] : value,
             }
-            else if(name === 'lname')
-            {
-                return{
-                    fname : preValue.fname,
-                    lname : value,
-                    email : preValue.email,
-                    phone : preValue.phone
-                };
-            }
-            else if(name === 'email')
-            {
-                return{
-                    fname : preValue.fname,
-                    lname : preValue.lname,
-                    email : value ,
-                    phone : preValue.phone
-                };
-            }
-            else if(name === 'phone')
-            {
-                return{
-                    fname : preValue.fname,
-                    lname : preValue.lnmae,
-                    email : preValue.email,
-                    phone :  value
-                };
-            }
+            // if(name === 'fname')
+            // {
+            //     return{
+            //         fname : value,
+            //         lname : preValue.lname,
+            //         email : preValue.email,
+            //         phone : preValue.phone
+            //     };
+            // }
+            // else if(name === 'lname')
+            // {
+            //     return{
+            //         fname : preValue.fname,
+            //         lname : value,
+            //         email : preValue.email,
+            //         phone : preValue.phone
+            //     };
+            // }
+            // else if(name === 'email')
+            // {
+            //     return{
+            //         fname : preValue.fname,
+            //         lname : preValue.lname,
+            //         email : value ,
+            //         phone : preValue.phone
+            //     };
+            // }
+            // else if(name === 'phone')
+            // {
+            //     return{
+            //         fname : preValue.fname,
+            //         lname : preValue.lnmae,
+            //         email : preValue.email,
+            //         phone :  value
+            //     };
+            // }
         })
 
     };
@@ -75,6 +79,7 @@ const App =() =>
                 <h1 className="header">Hello {fullName.fname} {fullName.lname}</h1>
                 <p>{fullName.email}</p>
                 <p>{fullName.phone}</p>
+                <p>{fullName.quali}</p>
                 <input 
                     className="content" 
                     type='text' 
@@ -107,6 +112,14 @@ const App =() =>
                     name = 'phone'
                     onChange={inputEvent}
                     value={fullName.phone}
+                />
+                <input 
+                    className="content" 
+                    type='text' 
+                    placeholder='Enter Your Qualification'
+                    name = 'quali'
+                    onChange={inputEvent}
+                    value={fullName.quali}
                 />
                 <button type="submit" className="btn" >Submit Me 👍</button>
             </div>

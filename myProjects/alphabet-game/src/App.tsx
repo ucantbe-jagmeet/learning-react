@@ -4,6 +4,7 @@ import  {HangmanWord}  from "./HangmanWord";
 import  {Keyboard}  from "./Keyboard";
 import words from "./wordList.json";
 
+
 function App() {
   const [wordToGuess, setWordToGuess] = useState( () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -26,7 +27,9 @@ function App() {
       <div style={{ fontSize: "2rem", textAlign: "center" }} >Lose Win </div>
       <HangmanDrawing/>
       <HangmanWord/>
-      <Keyboard/>
+      <div style={{alignSelf:"stretch"}} >
+        <Keyboard/>
+      </div>
     </div>
   );  
 }

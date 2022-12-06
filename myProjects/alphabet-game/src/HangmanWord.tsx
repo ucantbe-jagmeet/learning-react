@@ -4,7 +4,7 @@ export function HangmanWord(){
     return <div style={{ display:"flex", gap:".25em", fontSize:"5rem", fontWeight:"bold", textTransform: "uppercase",fontFamily:"monospace" }}>
         {word.split("").map((letter, index) => (
             <span style={{ borderBottom:" .1em solid black"}} >
-                <span style={{visibility: guessedLetters.includes(letter) ? "visible": "hidden" }} key={index} >{letter}</span>
+                <span style={{visibility: guessedLetters.includes(letter) ? "visible": "hidden" }} key={index} > {letter} </span>
             </span>
         ))}
     </div>

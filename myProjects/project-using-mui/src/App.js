@@ -1,13 +1,17 @@
+import React from 'react';
+import {AiOutlineDown} from 'react-icons/ai';
+
 
 function App() {
   return (
     <div className="container">
-      <h1>React Interview Questions</h1>
-      <div className="box">
-        {/*icon */}
-        <h3>Question</h3>
-        <h4>Answer</h4>
-
+      <div className="main__div">
+          <h1>React Interview Questions</h1>
+          <div className="box">
+            <AiOutlineDown className='icon'/>
+            <h3>Question</h3>
+            <p>Answer</p>
+          </div>
       </div>
     </div>
   );

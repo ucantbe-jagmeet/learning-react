@@ -1,0 +1,10 @@
+li{
+    list-style: none;  
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+.active{
+    color:#5f99be;
+}

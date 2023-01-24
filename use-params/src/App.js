@@ -4,7 +4,8 @@ import MainPage from "./MainPage.jsx";
 import Home from "./Home.jsx";
 import About from "./About.jsx";
 import Services from "./Services.jsx";
-import Contact from "./Contact.jsx";
+import User from "./User.jsx";
+import Error from "./Error.jsx";
 import "./app.css";
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
           <Route exact path="home" element={<Home />} />
           <Route exact path="about" element={<About />} />
           <Route exact path="services" element={<Services />} />
-          <Route exact path="contact" element={<Contact />} />
+          <Route exact path="user/:fname/:lname" element={<User />} />
+          <Route path="*" element={<Error />} />
         </Route>
       </Routes>
     </BrowserRouter>

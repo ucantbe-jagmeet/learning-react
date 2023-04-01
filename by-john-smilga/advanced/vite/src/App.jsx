@@ -1,9 +1,9 @@
-import "./App.css";
+import Starter from "./tutorial/01-error-example";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello</h1>
+    <div className="container">
+      <Starter />
     </div>
   );
 }

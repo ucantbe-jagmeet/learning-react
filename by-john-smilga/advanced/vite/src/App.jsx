@@ -1,4 +1,4 @@
-import Starter from "./tutorial/01-error-example";
+import Starter from "./tutorial/02-useState";
 
 function App() {
   return (

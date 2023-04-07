@@ -6,10 +6,6 @@ const useStateBasics = () => {
   // const [Count, setCount] = useState(0);
   const [people, setPeople] = useState(data);
 
-  const handleClick = () => {
-    console.log(data);
-  };
-
   return (
     <div>
       {people.map((items) => {
@@ -19,13 +15,26 @@ const useStateBasics = () => {
           <>
             <div key={id}>
               <h4>{name}</h4>
-              <button type="button" onClick={handleClick}>
+              <button
+                type="button"
+                onClick={() =>
+                  setPeople(people.filter((person) => person.id !== id))
+                }
+              >
                 Remove
               </button>
             </div>
           </>
         );
       })}
+      <button
+        type="button"
+        className="btn"
+        onClick={() => setPeople([])}
+        style={{ marginTop: "2rem" }}
+      >
+        Clear All
+      </button>
     </div>
   );
 };

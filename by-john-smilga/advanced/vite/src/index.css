@@ -338,3 +338,10 @@ ul {
   text-transform: capitalize;
   display: inline-block;
 }
+
+.img1 {
+  width: 30vw;
+  height: 40vh;
+  border-radius: 10px;
+  margin-right: 1.5rem;
+}

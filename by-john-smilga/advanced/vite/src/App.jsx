@@ -1,4 +1,4 @@
-import Starter from "./tutorial/01-useState/04-useState-setTimeout";
+import Starter from "./tutorial/02-useEffect/01-useEffect";
 
 function App() {
   return (

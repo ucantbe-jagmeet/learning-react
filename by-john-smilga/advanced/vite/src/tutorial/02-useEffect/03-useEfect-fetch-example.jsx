@@ -18,7 +18,7 @@ const useEffectBasics = () => {
       }
     };
     fetchData();
-    console.log(`hello`);
+    // console.log(`hello`);
   }, []);
 
   return (

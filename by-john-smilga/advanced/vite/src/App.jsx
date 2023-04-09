@@ -1,4 +1,4 @@
-import Starter from "./tutorial/03-conditional-rendering/04-short-circuit-example";
+import Starter from "./tutorial/03-conditional-rendering/06-user-challenge";
 
 function App() {
   return (

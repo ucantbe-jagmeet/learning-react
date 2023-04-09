@@ -1,4 +1,4 @@
-import Starter from "./tutorial/03-conditional-rendering/06-user-challenge";
+import Starter from "./tutorial/03-conditional-rendering/06-user-challenge2";
 
 function App() {
   return (

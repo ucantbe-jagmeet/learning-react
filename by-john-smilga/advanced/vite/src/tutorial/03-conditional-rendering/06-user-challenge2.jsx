@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const toggleChallenge = () => {
+const UserChallenge = () => {
   const [Value, setValue] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -37,4 +37,4 @@ const toggleChallenge = () => {
   );
 };
 
-export default toggleChallenge;
+export default UserChallenge;

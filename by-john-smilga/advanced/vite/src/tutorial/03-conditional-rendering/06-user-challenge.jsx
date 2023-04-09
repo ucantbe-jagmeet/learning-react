@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const toggleChallenge = () => {
+const UserChallenge = () => {
   const [Value, setValue] = useState(false);
   const [user, setUser] = useState({ name: "Jagmeet" });
 
@@ -30,4 +30,4 @@ const Alert1 = () => {
   return <div className="alert alert-success">Yes you can logout now</div>;
 };
 
-export default toggleChallenge;
+export default UserChallenge;

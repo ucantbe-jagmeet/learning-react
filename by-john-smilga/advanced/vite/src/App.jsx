@@ -1,4 +1,4 @@
-import Starter from "./tutorial/03-conditional-rendering/08-useEffect-timer-fun";
+import Starter from "./tutorial/03-conditional-rendering/09-useEffect-events";
 
 function App() {
   return (

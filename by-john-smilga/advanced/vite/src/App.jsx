@@ -1,4 +1,4 @@
-import Starter from "./tutorial/03-conditional-rendering/07-useEffect-cleanup-fun";
+import Starter from "./tutorial/03-conditional-rendering/08-useEffect-timer-fun";
 
 function App() {
   return (

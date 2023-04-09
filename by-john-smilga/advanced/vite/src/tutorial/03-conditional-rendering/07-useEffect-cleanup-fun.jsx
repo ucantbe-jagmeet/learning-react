@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const toggleChallenge = () => {
+const CleanupFunction = () => {
   const [Value, setValue] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -14,7 +14,7 @@ const toggleChallenge = () => {
 
   return (
     <div>
-      <h2>User Challenge</h2>
+      <h2>CleanUp Function</h2>
       {user ? (
         <div>
           <h4> hello there , {user.name}</h4>
@@ -37,4 +37,4 @@ const toggleChallenge = () => {
   );
 };
 
-export default toggleChallenge;
+export default CleanupFunction;

@@ -1,4 +1,4 @@
-import Starter from "./tutorial/02-useEffect/05-hook-rules";
+import Starter from "./tutorial/02-useEffect/06-conditional-rendering";
 
 function App() {
   return (

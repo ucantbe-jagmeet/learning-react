@@ -335,10 +335,10 @@ main {
 .btn-container {
   margin-bottom: 1rem;
 }
-.prev-btn,
+.prev-btn, 
 .next-btn {
   color: var(--primary-700);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   background: transparent;
   border-color: transparent;
   margin: 0 0.5rem;

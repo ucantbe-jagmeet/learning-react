@@ -187,6 +187,7 @@ ul {
   font-size: var(--small-text);
   margin-bottom: 0.5rem;
   text-transform: capitalize;
+  
   letter-spacing: var(--letterSpacing);
 }
 .form-input,

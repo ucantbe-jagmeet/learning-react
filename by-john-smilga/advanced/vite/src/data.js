@@ -22,4 +22,4 @@ const people = [
   { id: 4, name: "david" },
 ];
 
-export default data;
+export default people;

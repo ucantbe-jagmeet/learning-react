@@ -1,10 +1,10 @@
-import { Home, About } from "./tutorial/04-project-structure/Pages/Index";
+import Starter from "./tutorial/05-leverage-javascript/List";
 
 function App() {
   return (
     <div className="container">
-      <Home />
-      <About />
+      <h2>Leverage Javascript</h2>
+      <Starter />
     </div>
   );
 }

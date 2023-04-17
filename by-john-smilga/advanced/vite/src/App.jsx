@@ -1,10 +1,10 @@
-import Starter from "./tutorial/03-conditional-rendering/09-useEffect-events";
-import Navbar from "./tutorial/04-project-structure/navbar";
+import { Home, About } from "./tutorial/04-project-structure/Pages/Index";
 
 function App() {
   return (
     <div className="container">
-      <Navbar />
+      <Home />
+      <About />
     </div>
   );
 }

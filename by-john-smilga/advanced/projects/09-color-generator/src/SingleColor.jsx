@@ -7,7 +7,7 @@ const SingleColor = ({ index, color }) => {
   const saveToClipBoard = async () => {
     if (navigator.clipboard) {
       try {
-        await navigator.clipboard.writeText(`3${hex}`);
+        await navigator.clipboard.writeText(`${hex}`);
         toast.success("color copied to clip board");
       } catch (error) {
         toast.error("Failed to  copy color to clip board");

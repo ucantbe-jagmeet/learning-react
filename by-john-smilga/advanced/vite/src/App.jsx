@@ -1,4 +1,4 @@
-import Starter from "./tutorial/06-forms/04-other-inputs";
+import Starter from "./tutorial/06-forms/05-form-data";
 
 function App() {
   return (

@@ -48,7 +48,7 @@ const ControlledInputs = () => {
           <div key={item.id}>
             <h4>{item.name}</h4>
             <button className="btn" onClick={() => handleList(item.id)}>
-              remove
+              remove user
             </button>
           </div>
         );

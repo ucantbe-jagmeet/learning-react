@@ -1,4 +1,4 @@
-import Starter from "./tutorial/08-custom-hooks/02-fetch-data";
+import Starter from "./tutorial/09-context-api/Navbar";
 
 function App() {
   return (

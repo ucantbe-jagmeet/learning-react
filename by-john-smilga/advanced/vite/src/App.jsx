@@ -1,4 +1,4 @@
-import Starter from "./tutorial/09-context-api/create-context/Navbar";
+import Starter from "./tutorial/11-useReducer/02-useReducer-setup.jsx";
 
 function App() {
   return (

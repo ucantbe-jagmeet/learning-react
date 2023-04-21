@@ -1,5 +1,5 @@
 import Title from "./components/Title";
-import Starter from "./examples/1-first-request";
+import Starter from "./examples/2-headers";
 function App() {
   return (
     <main>

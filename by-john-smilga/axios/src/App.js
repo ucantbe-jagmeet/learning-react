@@ -1,5 +1,7 @@
 import Title from "./components/Title";
-import Starter from "./examples/3-post-request";
+import Starter from "./examples/4-global-instance";
+import "./axios/global";
+
 function App() {
   return (
     <main>

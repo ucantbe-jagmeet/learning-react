@@ -1,4 +1,4 @@
-import Starter from "./tutorial/12-performance/01-lower-state/index";
+import Starter from "./tutorial/12-performance/02-lower-state-challenge/index";
 
 function App() {
   return (

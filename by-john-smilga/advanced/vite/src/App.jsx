@@ -1,4 +1,4 @@
-import Starter from "./tutorial/12-performance/03-hooks/index";
+import Starter from "./tutorial/13-useCallback/index";
 
 function App() {
   return (

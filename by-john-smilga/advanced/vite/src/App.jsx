@@ -1,4 +1,4 @@
-import Starter from "./tutorial/11-useReducer/02-useReducer-setup.jsx";
+import Starter from "./tutorial/12-performance/01-lower-state/index";
 
 function App() {
   return (

@@ -26,24 +26,26 @@ export const AppProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
   };
+
   const remove = (id) => {
     dispatch({ type: REMOVE, payload: { id } });
   };
+
   const increase = (id) => {
     dispatch({ type: INCREASE, payload: { id } });
   };
+
   const decrease = (id) => {
     dispatch({ type: DECREASE, payload: { id } });
   };
 
   const fetchData = async () => {
     dispatch({ type: LOADING });
-
     const resp = await fetch(url);
     const cart = await resp.json();
-
     dispatch({ type: DISPLAY_ITEMS, payload: { cart } });
   };
+
   useEffect(() => {
     fetchData();
   }, []);

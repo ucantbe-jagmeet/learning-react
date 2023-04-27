@@ -34,6 +34,7 @@ const products_reducer = (state, action) => {
       featured_products: featured_products,
     };
   }
+
   if (action.type === GET_PRODUCTS_ERROR) {
     return {
       ...state,

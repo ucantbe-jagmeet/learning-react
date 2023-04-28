@@ -7,7 +7,7 @@ import { ProductsProvider } from "./context/products_context";
 import { FilterProvider } from "./context/filter_context";
 import { CartProvider } from "./context/cart_context";
 import { UserProvider } from "./context/user_context";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider, User } from "@auth0/auth0-react";
 
 //
 //TqAB779rMpVee05BAMAdLH8BbK18DZ5f
@@ -20,12 +20,14 @@ root.render(
     clientId="TqAB779rMpVee05BAMAdLH8BbK18DZ5f"
     authorizationParams={{ redirect_uri: window.location.origin }}
   >
-    <ProductsProvider>
-      <FilterProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </FilterProvider>
-    </ProductsProvider>
+    <UserProvider>
+      <ProductsProvider>
+        <FilterProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </FilterProvider>
+      </ProductsProvider>
+    </UserProvider>
   </Auth0Provider>
 );

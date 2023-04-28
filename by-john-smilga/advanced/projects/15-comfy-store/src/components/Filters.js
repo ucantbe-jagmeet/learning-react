@@ -83,6 +83,47 @@ const Filters = () => {
             </select>
           </div>
           {/*end  companies */}
+
+          {/* Colors */}
+          <div className="form-control">
+            <h5>colors</h5>
+            <div className="colors">
+              {colors.map((c, index) => {
+                if (c === "all") {
+                  return (
+                    <button
+                      name="color"
+                      onClick={updateFilters}
+                      data-color="all"
+                      key={index}
+                      className={`${
+                        color === "all" ? "all-btn active" : "all-btn"
+                      }`}
+                    >
+                      all
+                    </button>
+                  );
+                }
+
+                return (
+                  <button
+                    style={{ background: c }}
+                    name="color"
+                    key={index}
+                    className={`${
+                      color === c ? "color-btn active" : "color-btn"
+                    }`}
+                    data-color={c}
+                    onClick={updateFilters}
+                  >
+                    {color === c ? <FaCheck /> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* End of Colors */}
         </form>
       </div>
     </Wrapper>

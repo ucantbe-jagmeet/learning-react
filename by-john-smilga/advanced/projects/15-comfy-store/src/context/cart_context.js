@@ -12,7 +12,7 @@ const initialState = {
   cart: [],
   total_items: 0,
   total_amount: 0,
-  shippng_fee: 534,
+  shipping_fee: 534,
 };
 
 const CartContext = React.createContext();
@@ -24,8 +24,18 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } });
   };
 
+  const removeItem = (id) => {};
+
+  const toggleAmount = (id, value) => {};
+
+  const clearCart = () => {};
+
   return (
-    <CartContext.Provider value={{ ...state }}>{children}</CartContext.Provider>
+    <CartContext.Provider
+      value={{ ...state, removeItem, toggleAmount, clearCart, addToCart }}
+    >
+      {children}
+    </CartContext.Provider>
   );
 };
 // make sure use

@@ -18,7 +18,7 @@ const filter_reducer = (state, action) => {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
-      filters: { ...state.filters, max_price: maxPrice },
+      filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
     };
   }
 
@@ -78,12 +78,11 @@ const filter_reducer = (state, action) => {
     const { name, value } = action.payload;
     return {
       ...state,
-      filters: { ...state, [name]: value },
+      filters: { ...state.filters, [name]: value },
     };
   }
 
   if (action.type === FILTER_PRODUCTS) {
-    console.log(`filtered products`);
     return { ...state };
   }
 

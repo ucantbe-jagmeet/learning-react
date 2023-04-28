@@ -12,8 +12,8 @@ const Filters = () => {
       company,
       color,
       min_price,
-      price,
       max_price,
+      price,
       shipping,
     },
     updateFilters,
@@ -24,7 +24,6 @@ const Filters = () => {
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
-  console.log(categories);
   return (
     <Wrapper>
       <div className="content">
@@ -83,7 +82,6 @@ const Filters = () => {
             </select>
           </div>
           {/*end  companies */}
-
           {/* Colors */}
           <div className="form-control">
             <h5>colors</h5>
@@ -122,8 +120,21 @@ const Filters = () => {
               })}
             </div>
           </div>
-
           {/* End of Colors */}
+          {/* Price */}
+          <div className="form-control">
+            <h5>Price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              name="price"
+              onChange={updateFilters}
+              min={min_price}
+              max={max_price}
+              value={price}
+            />
+          </div>
+          {/* End of Price */}
         </form>
       </div>
     </Wrapper>

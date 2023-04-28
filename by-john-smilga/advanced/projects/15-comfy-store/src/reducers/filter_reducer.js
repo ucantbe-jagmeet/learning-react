@@ -83,7 +83,7 @@ const filter_reducer = (state, action) => {
   }
 
   if (action.type === FILTER_PRODUCTS) {
-    console.log(`filtered product`);
+    console.log(`filtered products`);
     return { ...state };
   }
 

@@ -19,6 +19,7 @@ root.render(
     domain="dev-r1icna8bmlkywna3.us.auth0.com"
     clientId="TqAB779rMpVee05BAMAdLH8BbK18DZ5f"
     authorizationParams={{ redirect_uri: window.location.origin }}
+    cacheLocation="localstorage"
   >
     <UserProvider>
       <ProductsProvider>

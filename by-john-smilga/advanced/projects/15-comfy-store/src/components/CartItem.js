@@ -25,7 +25,12 @@ const CartItem = ({ id, name, image, color, price, amount }) => {
       <h5 className="price">{formatPrice(price)}</h5>
       <AmountButtons amount={amount} increase={increase} decrease={decrease} />
       <h5 className="subtotal">{formatPrice(price * amount)}</h5>
-      <button className="remove-btn" type="button" onClick={() => removeItem()}>
+      <button
+        className="remove-btn"
+        key={id}
+        type="button"
+        onClick={() => removeItem(id)}
+      >
         <FaTrash />
       </button>
     </Wrapper>

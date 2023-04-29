@@ -1,5 +1,5 @@
 {
-  "name": "ouch-couch",
+  "name": "comfy-sloth",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -47,6 +47,6 @@
     ]
   },
   "devDependencies": {
-    "netlify-cli": "^12.1.0"
+    "netlify-cli": "^12.14.0"
   }
 }

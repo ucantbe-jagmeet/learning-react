@@ -1,4 +1,3 @@
-import { FaRegTired } from "react-icons/fa";
 import {
   ADD_TO_CART,
   CLEAR_CART,
@@ -42,7 +41,7 @@ const cart_reducer = (state, action) => {
   }
 
   if (action.type === REMOVE_CART_ITEM) {
-    const tempCart = state.cart.filter((item) => item.id != action.payload);
+    const tempCart = state.cart.filter((item) => item.id !== action.payload);
     return { ...state, cart: tempCart };
   }
 
@@ -54,7 +53,7 @@ const cart_reducer = (state, action) => {
     const { id, value } = action.payload;
     const tempCart = state.cart.map((item) => {
       if (item.id === id) {
-        if (value == "inc") {
+        if (value === "inc") {
           let newAmount = item.amount + 1;
           if (newAmount > item.max) {
             newAmount = item.max;
@@ -62,7 +61,7 @@ const cart_reducer = (state, action) => {
 
           return { ...item, amount: newAmount };
         }
-        if (value == "dec") {
+        if (value === "dec") {
           let newAmount = item.amount - 1;
           if (newAmount < 1) {
             newAmount = 1;
@@ -70,9 +69,8 @@ const cart_reducer = (state, action) => {
 
           return { ...item, amount: newAmount };
         }
-      } else {
-        return item;
       }
+      return item;
     });
 
     return { ...state, cart: tempCart };

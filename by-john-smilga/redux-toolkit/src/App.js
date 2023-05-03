@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Modal from "./components/Modal";
 
 function App() {
+  const { isOpen } = useSelector((state) => state.modal);
   const { cartItems } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ function App() {
 
   return (
     <main>
-      <Modal />
+      {isOpen && <Modal />}
       <Navbar />
       <CartContainer />
     </main>

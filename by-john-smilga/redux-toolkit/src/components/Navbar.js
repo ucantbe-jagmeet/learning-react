@@ -2,8 +2,7 @@ import { CartIcon } from "../icons";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const { amount, cartItems } = useSelector((store) => store.cart);
-  console.log(cartItems);
+  const { amount, cartItems, total } = useSelector((store) => store.cart);
   return (
     <nav>
       <div className="nav-center">

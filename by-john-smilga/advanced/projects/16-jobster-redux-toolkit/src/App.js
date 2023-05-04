@@ -1,10 +1,10 @@
-import Landing from "./pages/Landing";
+import { Landing, Error, Dashboard, Register } from "./pages/Landing";
 
 function App() {
   return (
-    <>
+    <div>
       <Landing />
-    </>
+    </div>
   );
 }
 

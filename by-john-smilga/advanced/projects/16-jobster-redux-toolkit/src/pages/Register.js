@@ -13,13 +13,19 @@ const Register = () => {
   const [values, setValues] = useState(initialState);
 
   const handleChange = (e) => {
-    // console.log(e.target);
-    setValues(e.target.value);
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(`${name}:${value}`);
+    setValues({ ...values, [name]: value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
+    const { name, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !name)) {
+      console.log(`please fill out all fields`);
+      return;
+    }
   };
 
   const toggleMember = () => {
@@ -72,8 +78,6 @@ const Register = () => {
       </form>
     </Wrapper>
   );
-
-  return <div>Register</div>;
 };
 
 export default Register;

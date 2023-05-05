@@ -547,6 +547,7 @@ export const registerUser = createAsyncThunk(
   async (user, thunkAPI) => {
     console.log(`Register User : ${user}`)
 );
+
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user, thunkAPI) => {

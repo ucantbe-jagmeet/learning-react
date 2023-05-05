@@ -12,7 +12,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const toggle = () => {
-    dispatch(toggleSidebar);
+    dispatch(toggleSidebar());
   };
   return (
     <Wrapper>

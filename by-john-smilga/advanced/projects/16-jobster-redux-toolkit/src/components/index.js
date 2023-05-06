@@ -7,8 +7,9 @@ import FormRowSelect from "./FormRowSelect";
 import SearchContainer from "./SearchContainer";
 import JobsContainer from "./JobsContainer";
 import Job from "./Job";
-
+import Loading from "./Loading";
 export {
+  Loading,
   SearchContainer,
   JobsContainer,
   Job,

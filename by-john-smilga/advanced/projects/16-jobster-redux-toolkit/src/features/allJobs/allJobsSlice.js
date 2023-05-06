@@ -26,6 +26,7 @@ export const getAllJobs = createAsyncThunk(
     let url = `/jobs`;
     try {
       const resp = await customFetch.get(url);
+      return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue("There was an error");
     }

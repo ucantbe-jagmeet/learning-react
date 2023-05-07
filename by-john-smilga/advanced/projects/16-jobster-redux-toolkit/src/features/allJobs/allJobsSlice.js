@@ -29,7 +29,7 @@ export const getAllJobs = createAsyncThunk(
     let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
 
     if (search) {
-      url = url + `&${search}`;
+      url = url + `&search=${search}`;
     }
 
     try {

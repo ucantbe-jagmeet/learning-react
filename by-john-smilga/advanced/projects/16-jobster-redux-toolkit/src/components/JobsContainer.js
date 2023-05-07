@@ -19,6 +19,7 @@ const JobsContainer = () => {
     sort,
   } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllJobs());
     // eslint-disable-next-line

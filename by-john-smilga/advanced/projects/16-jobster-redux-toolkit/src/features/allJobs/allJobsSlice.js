@@ -46,7 +46,7 @@ export const showStats = createAsyncThunk(
 );
 
 const allJobsSlice = createSlice({
-  name: "allJob",
+  name: "allJobs",
   initialState,
   reducers: {
     showLoading: (state) => {

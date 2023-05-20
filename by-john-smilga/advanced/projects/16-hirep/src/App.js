@@ -31,7 +31,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="*" element={<Error />} />
       </Routes>
-      <ToastContainer position="top-right" />
+      <ToastContainer position="top-right" autoClose={2300} />
     </BrowserRouter>
   );
 }

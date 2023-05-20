@@ -15,7 +15,7 @@ const BigSidebar = () => {
         }
       >
         <div className="content">
-          <header>
+          <header style={{ marginLeft: "-50px", scale: "0.8" }}>
             <Logo />
           </header>
           <NavLinks />

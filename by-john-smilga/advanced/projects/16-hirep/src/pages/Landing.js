@@ -12,11 +12,12 @@ const Landing = () => {
       <div className="container page">
         <div className="info">
           <h1>
-            Job <span>Tracking</span> App
+            Jobs <span>Tracking</span> App
           </h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt
-            hic omnis fuga excepturi ipsum fugit modi aliquam ullam nihil ut.
+            HiRep is the one-stop for Job Vacancies and Positions. Public Sector
+            Undertakings, Educational Institutions, Banks, Private Companies,
+            Tech Conglomerates as well as Admissions, and everything in between.
           </p>
           <Link to="/register" className="btn btn-hero">
             Login/Register
@@ -42,6 +43,7 @@ const Wrapper = styled.main`
     display: grid;
     align-items: center;
     margin-top: 3rem;
+    margin-top: 130px;
   }
 
   h1 {

@@ -26,7 +26,7 @@ const Sidebar = () => {
           <button className="close-btn" onClick={toggle}>
             <FaTimes />
           </button>
-          <header>
+          <header style={{ scale: "0.75" }}>
             <Logo />
           </header>
           <NavLinks toggleSidebar={toggle} />

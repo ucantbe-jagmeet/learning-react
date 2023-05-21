@@ -35,6 +35,31 @@ const data = [
     text: "CPP",
     icon: <FaRust />,
   },
+  {
+    id: 7,
+    text: "JAVA",
+    icon: <DiJava />,
+  },
+  {
+    id: 8,
+    text: "Javascript",
+    icon: <IoLogoJavascript />,
+  },
+  {
+    id: 9,
+    text: "Python",
+    icon: <FaPython />,
+  },
+  {
+    id: 10,
+    text: "CPP",
+    icon: <FaRust />,
+  },
+  {
+    id: 11,
+    text: "CPP",
+    icon: <TbBrandCpp />,
+  },
 ];
 
 export default data;

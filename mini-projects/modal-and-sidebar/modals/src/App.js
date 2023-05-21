@@ -16,7 +16,11 @@ function App() {
       }
     >
       <div
-        className="text-white  w-fit rounded-br-lg cursor-pointer"
+        className={
+          isSidebarOpen
+            ? "text-white w-fit rounded-br-lg cursor-pointer bg-green-300 "
+            : "text-purple-600  w-fit rounded-br-lg cursor-pointer bg-blue-200"
+        }
         onMouseEnter={() => setSidebarOpen(!isSidebarOpen)}
         onMouseLeave={() => setSidebarOpen(!isSidebarOpen)}
       >
@@ -27,7 +31,7 @@ function App() {
             <>
               <p
                 key={id}
-                className=" px-2 py-4 text-2xl text-purple-600 flex    border-r-purple-400 border-2 border-t-0 border-l-0 border-b-0 hover:text-blue-400"
+                className=" px-2 py-4 text-2xl t flex    border-r-purple-400 border-2 border-t-0 border-l-0 border-b-0 hover:text-red-400 text-center"
               >
                 <p className="mx-2 text-3xl">{icon}</p>
                 {isSidebarOpen ? <Title text={text} /> : null}

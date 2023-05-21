@@ -13,7 +13,7 @@ const Sidebar = ({
 }) => {
   const handleEvent = (link) => {
     setModelData(link);
-    setOpenModel(!openModel);
+    setOpenModel(true);
   };
 
   useEffect(() => {}, [modelData]);

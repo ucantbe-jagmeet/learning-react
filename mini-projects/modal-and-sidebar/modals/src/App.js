@@ -6,7 +6,8 @@ import Data from "./icons";
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [openModel, setOpenModel] = useState(false);
+  const [openModel, setOpenModel] = useState(0);
+  const [modelData, setModelData] = useState({});
 
   return (
     <>
@@ -17,6 +18,8 @@ function App() {
           setOpenModel={setOpenModel}
           openModel={openModel}
           Data={Data}
+          modelData={modelData}
+          setModelData={setModelData}
         />
       </div>
     </>

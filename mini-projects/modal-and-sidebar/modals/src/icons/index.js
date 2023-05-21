@@ -32,7 +32,7 @@ const data = [
   },
   {
     id: 6,
-    text: "CPP",
+    text: "Rust",
     icon: <FaRust />,
   },
   {
@@ -52,7 +52,7 @@ const data = [
   },
   {
     id: 10,
-    text: "CPP",
+    text: "Rust",
     icon: <FaRust />,
   },
   {

@@ -1,7 +1,7 @@
 import React from "react";
 
-const Title = (props) => {
-  return <p className="ease-in duration-300">{props.text}</p>;
+const Title = ({ text }) => {
+  return <p>{text}</p>;
 };
 
 export default Title;

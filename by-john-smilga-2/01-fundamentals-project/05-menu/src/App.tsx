@@ -1,9 +1,12 @@
+import Title from "./Title"
 
 function App() {
   return (
-    <>
-     <h2>menu bolte</h2>
-    </>
+    <main>
+     <section className="menu">
+        <Title text='our menu'/>
+     </section>
+    </main>
   )
 }
 

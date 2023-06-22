@@ -11,8 +11,6 @@ interface IMenu{
 
 
 const MenuItem:React.FC<IMenu> = ({ title, category, price,img, desc}) => {
-    console.log(title, category, img , desc, title);
-    
   return (
     <article className='menu-item'> 
         <img src={img} alt={title} className='img' />

@@ -1,5 +1,6 @@
 import React,{ useEffect, useState,FC } from "react"
 import JobsInfo from "./JobsInfo"
+import BtnContainer from "./BtnContainer"
 const url = "https://course-api.com/react-tabs-project"
 
 interface IJobsInfo{
@@ -43,6 +44,8 @@ const App:React.FC = () => {
   return (
     <section className="jobs-center">
         {/* button container */}
+        <BtnContainer jobs={jobs}/>
+
         {/* job info */}
 
         <JobsInfo jobs={jobs}/>

@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react"
-
+import JobsInfo from "./JobsInfo"
 const url = "https://course-api.com/react-tabs-project"
+
+interface IJobsInfo{
+  id:string,
+  order:number,
+  title:string,
+  dates:string,
+  duties:string[],
+  company:string,
+}
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
-  const [jobs, setJobs] = useState([])
+  const [jobs, setJobs] = useState<IJobsInfo[]>([])
 
   const fetchJobs = async () =>{
     setIsLoading(true)
     try {
-    const response = await fetch( url)
-    const newjobs = await response.json()
+      const response = await fetch( url)
+      const newjobs = await response.json()
 
-    setJobs(newjobs)
-    setIsLoading(false)
-   } catch (error) {
-    console.log(error);
-   }
+      setJobs(newjobs)
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(()=>{
@@ -30,9 +39,12 @@ function App() {
   }
 
   return (
-    <>
-     Tabs project bolte
-    </>
+    <section className="jobs-center">
+        {/* button container */}
+        {/* job info */}
+
+        <JobsInfo jobs={jobs}/>
+    </section>
   )
 }
 

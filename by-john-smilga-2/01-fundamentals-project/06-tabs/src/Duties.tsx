@@ -7,21 +7,19 @@ interface IDuties{
 
 const Duties:React.FC<IDuties> = ({duties}) => {
 
-    const id = uuidv4()
-    console.log(id);
-    
-  return (
-    <div>
-        {
-            duties.map((duty)=>{
-                return ( 
-                <div key={id} className='job-desc'>
-                    <FaAngleDoubleRight className='job-icon'/>
-                    <p>{duty}</p>
-                </div>)
-            })
-        }
-    </div>
+    // const id = uuidv4()
+    return (
+        <div>
+            {
+                duties.map((duty, index)=>{
+                    return ( 
+                    <div key={index} className='job-desc'>
+                        <FaAngleDoubleRight className='job-icon'/>
+                        <p>{duty}</p>
+                    </div>)
+                })
+            }
+        </div>
   )
 }
 

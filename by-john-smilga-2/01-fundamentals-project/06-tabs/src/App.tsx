@@ -15,6 +15,8 @@ interface IJobsInfo{
 const App:React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [jobs, setJobs] = useState<IJobsInfo[]>([])
+  const [currentItem, setCurrentItem] = useState<number>(0)
+
 
   const fetchJobs = async () =>{
     setIsLoading(true)
@@ -44,11 +46,10 @@ const App:React.FC = () => {
   return (
     <section className="jobs-center">
         {/* button container */}
-        <BtnContainer jobs={jobs}/>
+        <BtnContainer jobs={jobs} currentItem={currentItem} setCurrentItem={setCurrentItem}/>
 
         {/* job info */}
-
-        <JobsInfo jobs={jobs}/>
+        <JobsInfo jobs={jobs} currentItem={currentItem}/>
     </section>
   )
 }

@@ -10,12 +10,15 @@ interface IJobsInfo{
 }
 
 interface IJobsInfoProps{
-    jobs: IJobsInfo[]
+    jobs: IJobsInfo[],
+    currentItem: number
 }
 
-const JobsInfo:React.FC<IJobsInfoProps> = ({jobs}) => {
+const JobsInfo:React.FC<IJobsInfoProps> = ({jobs, currentItem}) => {
     if(jobs && jobs.length > 1){
-        const { company, dates, duties, title} = jobs[0]
+        console.log(currentItem);
+        
+        const { company, dates, duties, title} = jobs[currentItem]
     
             return (
             <article className='job-info'>

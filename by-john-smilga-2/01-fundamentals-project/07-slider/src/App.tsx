@@ -1,12 +1,11 @@
+import Carousel from "./Carousel"
 
 function App() {
 
   return (
-    <>
-      <div>
-      Slider bolte
-      </div>
-    </>
+      <main>
+        <Carousel/>
+      </main>
   )
 }
 

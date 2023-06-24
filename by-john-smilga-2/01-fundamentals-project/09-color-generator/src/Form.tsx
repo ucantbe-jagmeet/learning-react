@@ -2,8 +2,9 @@ import React,{useState} from 'react'
 
 const Form:React.FC = () => {
     const [color, setColor] = useState('')
-    const handleSubmit = (e) =>{ console.log(e);
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{ console.log(e);
     }
+    
   return (
     <section className='container'>
         <h4>Color generator</h4>
@@ -12,7 +13,6 @@ const Form:React.FC = () => {
             <input type="text" value={color} onChange={(e)=> setColor(e.target.value)} placeholder='#f15025'/>
             <button className='btn' type='submit' style={{background: color}}>Submit</button>
         </form>
-
     </section>
   )
 }

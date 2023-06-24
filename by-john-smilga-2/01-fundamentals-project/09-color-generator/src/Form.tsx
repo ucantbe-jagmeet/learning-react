@@ -1,8 +1,14 @@
 import React,{useState} from 'react'
 
-const Form:React.FC = () => {
+interface IForm{
+    addColor: (color: string) => void
+}
+
+const Form:React.FC<IForm> = ({addColor}) => {
     const [color, setColor] = useState('')
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{ console.log(e);
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{ 
+        e.preventDefault()
+        addColor(color)
     }
     
   return (

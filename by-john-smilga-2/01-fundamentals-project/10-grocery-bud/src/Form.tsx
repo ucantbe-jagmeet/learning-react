@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
+interface IFormProps{
+    addItem:( itemName: string)=>void;
+}
 
-const Form:React.FC = () => {
+const Form:React.FC<IFormProps> = ({addItem}) => {
     const [newItemName, setNewItemName] = useState('')
     const handleSubmit = (e: React.SyntheticEvent<EventTarget>)=>{
         e.preventDefault()
-        console.log(e);
+        if(!newItemName) return 
+        
+        addItem(newItemName)
+        setNewItemName('')
     }
 
 

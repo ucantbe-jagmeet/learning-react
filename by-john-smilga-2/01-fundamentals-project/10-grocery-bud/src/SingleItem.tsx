@@ -1,4 +1,4 @@
-import React ,{useState}from 'react'
+import React from 'react'
 
 interface IItemObject{
     name:string;
@@ -9,15 +9,15 @@ interface IItemObject{
 interface IItemProps{
     item: IItemObject;
     removeItem: (itemId:string)=>void ;
+    editItem: (itemId:string)=>void ;
 }
 
-const SingleItem:React.FC<IItemProps> = ({item, removeItem}) => {
-  const [isChecked, setIsChecked] = useState(false)
+const SingleItem:React.FC<IItemProps> = ({item, removeItem, editItem}) => {
     
   return (
     <div className='single-item'>
-        <input type="checkbox" checked={isChecked} onChange={()=>setIsChecked(!isChecked)}/>
-        <p style={{ textTransform:'capitalize' ,textDecoration: isChecked ? 'line-through' : undefined }}>{item.name}</p>
+        <input type="checkbox" checked={item.completed} onChange={()=> editItem(item.id)}/>
+        <p style={{ textTransform:'capitalize' ,textDecoration: item.completed ? 'line-through' : undefined }}>{item.name}</p>
         <button className='btn remove-btn' type='button' onClick={()=> removeItem(item.id)}>Delete</button>
     </div>
 

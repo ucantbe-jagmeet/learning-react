@@ -22,7 +22,11 @@ function App() {
 
     setItems([...items, newItem])
   }
-  const removeItem:(itemId:string)=>void = (itemId:string) =>{ console.log('Item Removed')}
+  
+  const removeItem:(itemId:string)=>void = (itemId:string) =>{ 
+    const newItems = items.filter((item)=> item.id !== itemId)
+    setItems( newItems)
+  }
 
   return (
     <section className="section-center"> 

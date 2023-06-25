@@ -12,6 +12,13 @@ const Form:React.FC<IFormProps> = ({addItem}) => {
         addItem(newItemName)
         setNewItemName('')
     }
+    const handleClick= (e: React.SyntheticEvent<EventTarget>)=>{
+        e.preventDefault()
+        if(!newItemName) return 
+        
+        addItem(newItemName)
+        setNewItemName('')
+    }
 
 
     return (
@@ -19,7 +26,7 @@ const Form:React.FC<IFormProps> = ({addItem}) => {
             <h4>Grocery Bud</h4>
             <div className="form-control">
                 <input type="text" className='form-input' value={newItemName} onChange={(e)=> setNewItemName(e.target.value)}/>
-                <button type='button' className='btn'>Add item</button>
+                <button type='button' className='btn' onClick={handleClick}>Add item</button>
             </div>
         </form>
     )

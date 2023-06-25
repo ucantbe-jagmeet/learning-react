@@ -9,9 +9,17 @@ interface IItemsObject{
   id:string;
 }
 
+const getLocalStorage: () => IItemsObject[] = () => {
+  const list: string | null = localStorage.getItem('list');
+  return list ? JSON.parse(list) : [];
+};
+
+const setLocalStorage:( items:IItemsObject[])=> void = (items) =>{
+  localStorage.setItem('list', JSON.stringify(items))
+}
 
 function App() {
-  const [items, setItems] = useState<IItemsObject[]>([])
+  const [items, setItems] = useState<IItemsObject[]>(getLocalStorage())
 
   const addItem:( itemName: string)=>void = (itemName) =>{
     const newItem:IItemsObject = {
@@ -19,13 +27,15 @@ function App() {
       completed: false,
       id: nanoid(),
     }
-
-    setItems([...items, newItem])
+    const newItems = [ ...items, newItem]
+    setItems(newItems)
+    setLocalStorage(newItems)
   }
-  
+
   const removeItem:(itemId:string)=>void = (itemId:string) =>{ 
     const newItems = items.filter((item)=> item.id !== itemId)
     setItems( newItems)
+    setLocalStorage(newItems)
   }
 
   return (

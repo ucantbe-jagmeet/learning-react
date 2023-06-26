@@ -1,11 +1,11 @@
+import Navbar from "./Navbar";
 
 function App() {
-
   return (
-    <div>
-        Navbar bolte
-    </div>
-  )
+    <main>
+      <Navbar />
+    </main>
+  );
 }
 
-export default App
+export default App;

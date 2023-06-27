@@ -1,5 +1,6 @@
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import React from "react";
+import { useGlobalContext } from "./context";
 interface ICartData {
   id: string;
   title: string;
@@ -9,7 +10,8 @@ interface ICartData {
 }
 
 const CartItem: React.FC<ICartData> = ({ id, img, title, price, amount }) => {
-  console.log(amount);
+  const { greeting } = useGlobalContext();
+  console.log(greeting);
 
   return (
     <article className="cart-item">

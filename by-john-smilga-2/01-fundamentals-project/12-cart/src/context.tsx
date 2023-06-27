@@ -5,22 +5,32 @@ import {
   createContext,
   ReactNode,
 } from "react";
-
-interface AppContextValue {
-  greeting: string;
-}
-
-const AppContext = createContext<AppContextValue | undefined>(undefined);
+import reducer from "./reducer";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
+interface ICartItem {
+  amount: number;
+}
+interface IAppState {
+  loading: boolean;
+  cart: ICartItem[];
+}
+
+const initialState = {
+  loading: false,
+  cart: [],
+};
+
+const AppContext = createContext<IAppState | undefined>(undefined);
+
 export const AppProvider = ({ children }: AppProviderProps) => {
-  const greeting = "hello";
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <AppContext.Provider value={{ greeting }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
   );
 };
 

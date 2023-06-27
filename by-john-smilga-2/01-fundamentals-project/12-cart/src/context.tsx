@@ -6,6 +6,14 @@ import {
   ReactNode,
 } from "react";
 import reducer from "./reducer";
+import {
+  CLEAR_CART,
+  REMOVE,
+  INCREASE,
+  DECREASE,
+  LOADING,
+  DISPLAY_ITEMS,
+} from "./actions";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -19,12 +27,12 @@ interface IAppState {
   cart: ICartItem[];
 }
 
+const AppContext = createContext<IAppState | undefined>(undefined);
+
 const initialState = {
   loading: false,
   cart: [],
 };
-
-const AppContext = createContext<IAppState | undefined>(undefined);
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);

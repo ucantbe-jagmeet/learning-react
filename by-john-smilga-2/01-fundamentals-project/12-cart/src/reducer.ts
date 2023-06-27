@@ -1,3 +1,12 @@
+import {
+  CLEAR_CART,
+  REMOVE,
+  INCREASE,
+  DECREASE,
+  LOADING,
+  DISPLAY_ITEMS,
+} from "./actions";
+
 interface ICartItem {
   amount: number;
 }

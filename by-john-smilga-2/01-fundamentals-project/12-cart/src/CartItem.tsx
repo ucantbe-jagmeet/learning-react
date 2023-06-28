@@ -1,15 +1,8 @@
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import React from "react";
-import { useGlobalContext } from "./context";
-interface ICartData {
-  id: string;
-  title: string;
-  price: string;
-  img: string;
-  amount: number;
-}
+import { ICartItem, useGlobalContext } from "./context";
 
-const CartItem: React.FC<ICartData> = ({ id, img, title, price, amount }) => {
+const CartItem: React.FC<ICartItem> = ({ id, img, title, price, amount }) => {
   return (
     <article className="cart-item">
       <img src={img} alt={title} />

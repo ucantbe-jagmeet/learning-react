@@ -6,14 +6,8 @@ import {
   LOADING,
   DISPLAY_ITEMS,
 } from "./actions";
+import { IAppState } from "./context";
 
-interface ICartItem {
-  amount: number;
-}
-interface IAppState {
-  loading: boolean;
-  cart: ICartItem[];
-}
 interface IAppAction {
   type: string;
   payload?: any;

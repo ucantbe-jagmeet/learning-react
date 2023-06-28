@@ -1,18 +1,15 @@
 import CartItem from "./CartItem";
-import cartItems from "./data";
-
-interface ICartData {
-  id: string;
-  title: string;
-  price: string;
-  img: string;
-  amount: number;
-}
+import { ICartItem, useGlobalContext } from "./context";
 
 const CartContainer = () => {
-  const cartArray: ICartData[] = [...cartItems];
+  const { cart } = useGlobalContext();
 
-  if (cartArray.length === 0) {
+  const cartEnt = cart.entries();
+  // console.log(cart.entries());
+
+  const cartArray: Array<[string, ICartItem]> = Array.from(cartEnt);
+
+  if (!cartEnt) {
     return (
       <section className="cart">
         {/* cart header */}
@@ -32,7 +29,7 @@ const CartContainer = () => {
       {/* cart items */}
       <div>
         {cartArray.map((cartItem) => {
-          return <CartItem key={cartItem.id} {...cartItem} />;
+          return <CartItem key={cartItem[0]} {...cartItem[1]} />;
         })}
       </div>
       {/* cart footer */}

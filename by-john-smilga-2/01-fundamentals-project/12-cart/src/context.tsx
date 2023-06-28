@@ -1,11 +1,6 @@
-import {
-  useContext,
-  useReducer,
-  useEffect,
-  createContext,
-  ReactNode,
-} from "react";
+import { useContext, useReducer, createContext, ReactNode } from "react";
 import reducer from "./reducer";
+import cartItems from "./data";
 import {
   CLEAR_CART,
   REMOVE,
@@ -19,29 +14,40 @@ interface AppProviderProps {
   children: ReactNode;
 }
 
-interface ICartItem {
+export interface ICartItem {
+  id: string;
+  title: string;
+  price: string;
+  img: string;
   amount: number;
 }
-interface IAppState {
+export interface IAppState {
   loading: boolean;
-  cart: ICartItem[];
+  cart: Map<string, ICartItem>;
 }
 
-const AppContext = createContext<IAppState | undefined>(undefined);
+export const AppContext = createContext<IAppState | undefined>(undefined);
 
-const initialState = {
+const initialState: IAppState = {
   loading: false,
-  cart: [],
+  cart: new Map(cartItems.map((item) => [item.id, item])),
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(dispatch);
 
   return (
     <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
   );
 };
 
-export const useGlobalContext = () => {
-  return useContext(AppContext);
+export const useGlobalContext = (): IAppState => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error(
+      "useGlobalContext must be used within a GlobalContextProvider"
+    );
+  }
+  return context;
 };

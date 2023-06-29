@@ -6,19 +6,19 @@ import {
   LOADING,
   DISPLAY_ITEMS,
 } from "./actions";
-import { IAppState } from "./context";
+import { IInitialState } from "./context";
 
 interface IAppAction {
   type: string;
   payload?: any;
 }
 
-const reducer = (state: IAppState, action: IAppAction): IAppState => {
-  if (action.type === "CAP") {
-    return state;
+const reducer = (state: IInitialState, action: IAppAction): IInitialState => {
+  if (action.type === "CLEAR_CART") {
+    return { ...state, cart: new Map() };
   }
 
-  return state;
+  throw new Error(`no mathing action type : ${action.type}`);
 };
 
 export default reducer;

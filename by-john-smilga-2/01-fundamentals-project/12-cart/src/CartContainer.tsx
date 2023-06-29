@@ -2,14 +2,13 @@ import CartItem from "./CartItem";
 import { ICartItem, useGlobalContext } from "./context";
 
 const CartContainer = () => {
-  const { cart } = useGlobalContext();
+  const { cart, clearCart } = useGlobalContext();
 
   const cartEnt = cart.entries();
-  // console.log(cart.entries());
 
   const cartArray: Array<[string, ICartItem]> = Array.from(cartEnt);
 
-  if (!cartEnt) {
+  if (cartArray.length === 0) {
     return (
       <section className="cart">
         {/* cart header */}
@@ -40,10 +39,7 @@ const CartContainer = () => {
             total <span>$10</span>
           </h5>
         </div>
-        <button
-          className="btn btn-hipster"
-          onClick={() => console.log("clear cart")}
-        >
+        <button className="btn btn-hipster" onClick={clearCart}>
           clear cart
         </button>
       </footer>

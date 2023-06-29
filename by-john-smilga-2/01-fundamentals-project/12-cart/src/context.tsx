@@ -24,21 +24,31 @@ export interface ICartItem {
 export interface IAppState {
   loading: boolean;
   cart: Map<string, ICartItem>;
+  clearCart: () => void;
+}
+export interface IInitialState {
+  loading: boolean;
+  cart: Map<string, ICartItem>;
 }
 
 export const AppContext = createContext<IAppState | undefined>(undefined);
 
-const initialState: IAppState = {
+const initialState: IInitialState = {
   loading: false,
   cart: new Map(cartItems.map((item) => [item.id, item])),
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(dispatch);
+
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
 
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, clearCart }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

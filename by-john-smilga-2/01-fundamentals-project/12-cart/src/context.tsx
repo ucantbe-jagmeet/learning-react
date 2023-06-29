@@ -1,4 +1,10 @@
-import { useContext, useReducer, createContext, ReactNode } from "react";
+import {
+  useContext,
+  useReducer,
+  createContext,
+  ReactNode,
+  useEffect,
+} from "react";
 import reducer from "./reducer";
 import cartItems from "./data";
 import {
@@ -9,6 +15,7 @@ import {
   LOADING,
   DISPLAY_ITEMS,
 } from "./actions";
+import { getTotals } from "./utils";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -28,6 +35,8 @@ export interface IAppState {
   remove: (id: string) => void;
   increase: (id: string) => void;
   decrease: (id: string) => void;
+  totalAmount: number;
+  totalCost: number;
 }
 export interface IInitialState {
   loading: boolean;
@@ -43,6 +52,12 @@ const initialState: IInitialState = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { totalAmount, totalCost } = getTotals(state.cart);
+
+  // useEffect(()=>{
+
+  // },[])
 
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
@@ -62,7 +77,15 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   return (
     <AppContext.Provider
-      value={{ ...state, clearCart, remove, increase, decrease }}
+      value={{
+        ...state,
+        clearCart,
+        remove,
+        increase,
+        decrease,
+        totalAmount,
+        totalCost,
+      }}
     >
       {children}
     </AppContext.Provider>

@@ -16,6 +16,7 @@ import {
   DISPLAY_ITEMS,
 } from "./actions";
 import { getTotals } from "./utils";
+const url = "https://www.course-api.com/react-useRefucer-cart-project";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -55,10 +56,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   const { totalAmount, totalCost } = getTotals(state.cart);
 
-  // useEffect(()=>{
-
-  // },[])
-
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
   };
@@ -74,6 +71,17 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const decrease: (id: string) => void = (id: string) => {
     dispatch({ type: DECREASE, payload: { id } });
   };
+
+  const fetchData = async () => {
+    dispatch({ type: LOADING });
+    const response = await fetch(url);
+    const cart = await response.json();
+    dispatch({ type: DISPLAY_ITEMS, payload: { cart } });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <AppContext.Provider

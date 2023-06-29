@@ -51,6 +51,16 @@ const reducer = (state: IInitialState, action: IAppAction): IInitialState => {
     return { ...state, cart: newCart };
   }
 
+  if (action.type === LOADING) {
+    return { ...state, loading: true };
+  }
+  if (action.type === DISPLAY_ITEMS) {
+    const newCart: Map<string, ICartItem> = new Map(
+      action.payload.cart.map((item: { id: ICartItem }) => [item.id, item])
+    );
+    return { ...state, loading: false, cart: newCart };
+  }
+
   throw new Error(`no mathing action type : ${action.type}`);
 };
 

@@ -3,7 +3,7 @@ import React from "react";
 import { ICartItem, useGlobalContext } from "./context";
 
 const CartItem: React.FC<ICartItem> = ({ id, img, title, price, amount }) => {
-  const { remove, increase } = useGlobalContext();
+  const { remove, increase, decrease } = useGlobalContext();
   return (
     <article className="cart-item">
       <img src={img} alt={title} />
@@ -23,7 +23,7 @@ const CartItem: React.FC<ICartItem> = ({ id, img, title, price, amount }) => {
         {/* amount */}
         <span className="amount">{amount}</span>
         {/* decrease amount */}
-        <button className="amount-btn" onClick={() => console.log("decrease")}>
+        <button className="amount-btn" onClick={() => decrease(id)}>
           <FaChevronDown className="amount-icon" />
         </button>
       </div>

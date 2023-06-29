@@ -25,6 +25,7 @@ export interface IAppState {
   loading: boolean;
   cart: Map<string, ICartItem>;
   clearCart: () => void;
+  remove: (id: string) => void;
 }
 export interface IInitialState {
   loading: boolean;
@@ -45,8 +46,12 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     dispatch({ type: CLEAR_CART });
   };
 
+  const remove: (id: string) => void = (id: string) => {
+    dispatch({ type: REMOVE, payload: { id } });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, clearCart }}>
+    <AppContext.Provider value={{ ...state, clearCart, remove }}>
       {children}
     </AppContext.Provider>
   );

@@ -1,3 +1,4 @@
+// Register Page types
 export interface IRegisterInitialState {
   name: string;
   email: string;
@@ -10,4 +11,14 @@ export interface IFormRow {
   value: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   labelText: string;
+}
+
+// User Slice Types
+export interface IUserSliceInitialState {
+  isLoading: boolean;
+  user: null;
+}
+export interface IUserSlice {
+  name: string;
+  initialState: IUserSliceInitialState;
 }

@@ -1,5 +1,11 @@
+import Landing from "./pages/Landing";
+
 function App() {
-  return <h1>Jobster App bolte</h1>;
+  return (
+    <div>
+      <Landing />
+    </div>
+  );
 }
 
 export default App;

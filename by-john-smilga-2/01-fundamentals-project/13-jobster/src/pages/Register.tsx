@@ -7,20 +7,25 @@ const initialState = {
   name: "",
   email: "",
   password: "",
-  isMember: false,
+  isMember: true,
 };
 
 const Register: React.FC = () => {
   const [values, setValues] = useState<IRegisterInitialState>(initialState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(`${name}:${value}`);
+    setValues({ ...values, [name]: value });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (e.target instanceof HTMLInputElement) {
-      console.log(e.target.value);
+    const { name, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !name)) {
+      console.log(`Please fill out all the Fields `);
+      return;
     }
   };
 

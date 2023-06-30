@@ -2,6 +2,7 @@ import React from "react";
 import main from "../assets/images/main.svg";
 import styled from "styled-components";
 import { Logo } from "../components";
+import { Link } from "react-router-dom";
 
 const Landing: React.FC = () => {
   return (
@@ -24,9 +25,9 @@ const Landing: React.FC = () => {
             earum ab excepturi dolore distinctio rerum necessitatibus sed
             officia non sit voluptatem accusamus.
           </p>
-          <button type="button" className="btn btn-hero">
+          <Link to="/register" className="btn btn-hero">
             Login/Register
-          </button>
+          </Link>
         </div>
         <img src={main} alt="job hunt" className="img main-img" />
       </div>

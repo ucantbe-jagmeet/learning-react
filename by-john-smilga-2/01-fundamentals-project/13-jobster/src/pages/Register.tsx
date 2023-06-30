@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Logo } from "../components";
+import { FormRow, Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import { IRegisterInitialState } from "../types";
 
@@ -19,10 +19,8 @@ const Register: React.FC = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (event.target instanceof HTMLInputElement) {
-      const inputElement = e.target;
-      const value = inputElement.value;
-      console.log(value);
+    if (e.target instanceof HTMLInputElement) {
+      console.log(e.target.value);
     }
   };
 
@@ -32,18 +30,31 @@ const Register: React.FC = () => {
         <Logo />
         <h3>login</h3>
         {/* Name Field */}
-        <div className="form-row">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={values.name}
-            className="form-input"
-            onChange={handleChange}
-          />
-        </div>
+        <FormRow
+          type="text"
+          name="name"
+          value={values.name}
+          handleChange={handleChange}
+          labelText="Name"
+        />
+
+        {/* Email Field */}
+        <FormRow
+          type="email"
+          name="email"
+          value={values.email}
+          handleChange={handleChange}
+          labelText="Email"
+        />
+
+        {/* Password Field */}
+        <FormRow
+          type="password"
+          name="password"
+          value={values.password}
+          handleChange={handleChange}
+          labelText="Password"
+        />
         <button type="submit" className="btn btn-block">
           submit
         </button>

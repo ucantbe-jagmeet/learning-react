@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
+import { IRegisterInitialState } from "../types";
 
 const initialState = {
   name: "",
@@ -10,15 +11,19 @@ const initialState = {
 };
 
 const Register: React.FC = () => {
-  const [values, setValues] = useState(initialState);
+  const [values, setValues] = useState<IRegisterInitialState>(initialState);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e.target.value);
+    if (event.target instanceof HTMLInputElement) {
+      const inputElement = e.target;
+      const value = inputElement.value;
+      console.log(value);
+    }
   };
 
   return (

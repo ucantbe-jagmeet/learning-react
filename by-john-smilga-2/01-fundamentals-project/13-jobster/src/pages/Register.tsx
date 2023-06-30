@@ -7,7 +7,7 @@ const initialState = {
   name: "",
   email: "",
   password: "",
-  isMember: true,
+  isMember: false,
 };
 
 const Register: React.FC = () => {
@@ -24,19 +24,25 @@ const Register: React.FC = () => {
     }
   };
 
+  const toggleMember = () => {
+    setValues({ ...values, isMember: !values.isMember });
+  };
+
   return (
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>
         <Logo />
-        <h3>login</h3>
+        <h3>{values.isMember ? "Login" : "Register"}</h3>
         {/* Name Field */}
-        <FormRow
-          type="text"
-          name="name"
-          value={values.name}
-          handleChange={handleChange}
-          labelText="Name"
-        />
+        {!values.isMember && (
+          <FormRow
+            type="text"
+            name="name"
+            value={values.name}
+            handleChange={handleChange}
+            labelText="Name"
+          />
+        )}
 
         {/* Email Field */}
         <FormRow
@@ -58,6 +64,13 @@ const Register: React.FC = () => {
         <button type="submit" className="btn btn-block">
           submit
         </button>
+
+        <p>
+          {values.isMember ? "Not a member yet ?" : " Already a member ?"}
+          <button type="button" className="member-btn" onClick={toggleMember}>
+            {values.isMember ? "Register" : "Login"}
+          </button>
+        </p>
       </form>
     </Wrapper>
   );

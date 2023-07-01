@@ -17,6 +17,8 @@ const initialState = {
 const Register: React.FC = () => {
   const [values, setValues] = useState<IRegisterInitialState>(initialState);
   const { user, isLoading } = useAppSelector((store) => store.user);
+  console.log(user);
+
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FormRow, Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-import { IRegisterInitialState } from "../types";
+import { ILoginUser, IRegisterInitialState } from "../types";
 import { toast } from "react-toastify";
+import { useAppSelector, useAppDispatch } from "../store";
+import { loginUser, registerUser } from "../features/user/userSlice";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "",
@@ -13,11 +16,12 @@ const initialState = {
 
 const Register: React.FC = () => {
   const [values, setValues] = useState<IRegisterInitialState>(initialState);
+  const { user, isLoading } = useAppSelector((store) => store.user);
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(`${name}:${value}`);
     setValues({ ...values, [name]: value });
   };
 
@@ -28,6 +32,19 @@ const Register: React.FC = () => {
       toast.error(`Please Fill Out All Fields`);
       return;
     }
+    if (isMember) {
+      dispatch(
+        loginUser({ email: email, password: password }) as unknown as AnyAction
+      );
+      return;
+    }
+    dispatch(
+      registerUser({
+        name: name,
+        email: email,
+        password: password,
+      }) as unknown as AnyAction
+    );
   };
 
   const toggleMember = () => {

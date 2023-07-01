@@ -16,7 +16,7 @@ const initialState = {
 
 const Register: React.FC = () => {
   const [values, setValues] = useState<IRegisterInitialState>(initialState);
-  // const { user, isLoading } = useAppSelector((store) => store.user);
+  const { user, isLoading } = useAppSelector((store) => store.user);
 
   const dispatch = useAppDispatch();
 
@@ -85,7 +85,7 @@ const Register: React.FC = () => {
           handleChange={handleChange}
           labelText="Password"
         />
-        <button type="submit" className="btn btn-block">
+        <button type="submit" className="btn btn-block" disabled={isLoading}>
           submit
         </button>
 

@@ -12,10 +12,11 @@ export const registerUser = createAsyncThunk<void, IRegisterUser>(
   "user/registerUser",
   async (user, thunkAPI) => {
     try {
-      const resp = await customFetch.post("/auth/testingRegister", user);
-      console.log(resp);
+      const resp = await customFetch.post("/auth/register", user);
+      return resp.data;
     } catch (error) {
-      toast.error(error.response.data.msg);
+      const { msg } = error.respone.data;
+      return thunkAPI.rejectWithValue(msg);
     }
   }
 );
@@ -30,6 +31,23 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerUser.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        const { user } = payload;
+        state.isLoading = true;
+        state.user = user;
+        toast.success(`Hello there ${user.name}`);
+      })
+      .addCase(registerUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      });
+  },
 });
 
 export default userSlice.reducer;

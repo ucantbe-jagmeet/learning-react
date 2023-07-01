@@ -1,5 +1,3 @@
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-
 // Register Page types
 export interface IRegisterInitialState {
   name: string;
@@ -33,4 +31,13 @@ export interface IRegisterUser {
   name: string;
   email: string;
   password: string;
+}
+
+// user Type
+export interface IUser {
+  email: string;
+  lastName: string;
+  location: string;
+  name: string;
+  token: string;
 }

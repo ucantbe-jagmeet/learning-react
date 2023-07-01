@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useAppSelector, useAppDispatch } from "../store";
 import { loginUser, registerUser } from "../features/user/userSlice";
 import { AnyAction } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -17,7 +18,7 @@ const initialState = {
 const Register: React.FC = () => {
   const [values, setValues] = useState<IRegisterInitialState>(initialState);
   const { user, isLoading } = useAppSelector((store) => store.user);
-
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +53,13 @@ const Register: React.FC = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
 
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 2200);
+    }
+  }, [user, navigate]);
   return (
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>

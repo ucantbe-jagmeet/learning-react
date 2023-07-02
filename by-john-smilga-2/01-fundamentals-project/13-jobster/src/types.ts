@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 // Register Page types
 export interface IRegisterInitialState {
   name: string;
@@ -41,4 +43,9 @@ export interface IUser {
   location: string;
   name: string;
   token: string;
+}
+
+//  protected route
+export interface ProtectedRouteProps {
+  children: ReactNode;
 }

@@ -49,3 +49,11 @@ export interface IUser {
 export interface ProtectedRouteProps {
   children: ReactNode;
 }
+
+// links type
+export interface ILinks {
+  id: number;
+  text: string;
+  path: string;
+  icon: ReactNode;
+}

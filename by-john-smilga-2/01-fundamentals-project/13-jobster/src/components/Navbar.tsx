@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "../assets/wrappers/Navbar";
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../store";
 import { Logo } from "./";
-import { toggleSidebar } from "../features/user/userSlice";
+import { toggleSidebar, logoutUser } from "../features/user/userSlice";
 
 const Navbar: React.FC = () => {
   const { user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+  const [showLogout, setShowLogout] = useState(false);
 
   const toggle = () => {
     dispatch(toggleSidebar());
@@ -26,17 +27,17 @@ const Navbar: React.FC = () => {
           <button
             type="button"
             className="btn"
-            onClick={() => console.log("toggle dropdown")}
+            onClick={() => setShowLogout(!showLogout)}
           >
             <FaUserCircle />
             {user?.name}
             <FaCaretDown />
           </button>
-          <div className="dropdown show-dropdown">
+          <div className={showLogout ? "dropdown show-dropdown" : "dropdown"}>
             <button
               type="button"
               className="dropdown-btn"
-              onClick={() => console.log("logout user")}
+              onClick={() => dispatch(logoutUser())}
             >
               Logout
             </button>

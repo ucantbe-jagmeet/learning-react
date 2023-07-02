@@ -4,7 +4,7 @@ export const addUserToLocalStorage: (user: IUser) => void = (user) => {
   localStorage.setItem("user", JSON.stringify(user));
 };
 
-export const removeUserToLocalStorage: (user: IUser) => void = (user) => {
+export const removeUserToLocalStorage = () => {
   localStorage.removeItem("user");
 };
 

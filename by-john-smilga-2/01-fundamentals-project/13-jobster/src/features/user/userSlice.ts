@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ToastContent, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import {
   ILoginUser,
   IRegisterUser,
@@ -13,6 +13,7 @@ import {
   getUserToLocalStorage,
   removeUserToLocalStorage,
 } from "../../utils/localStorage";
+import { AxiosError } from "axios";
 
 const initialState: IUserSliceInitialState = {
   isLoading: false,
@@ -27,8 +28,17 @@ export const registerUser = createAsyncThunk<void, IRegisterUser>(
       const resp = await customFetch.post("/auth/register", user);
       return resp.data;
     } catch (error) {
-      const { msg } = error.respone.data;
-      return thunkAPI.rejectWithValue(msg);
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      }
+      // unhandled non-AxiosError goes here
+      throw error;
     }
   }
 );
@@ -39,8 +49,16 @@ export const loginUser = createAsyncThunk<void, ILoginUser>(
       const resp = await customFetch.post("/auth/login", user);
       return resp.data;
     } catch (error) {
-      const { msg } = error.respone.data;
-      return thunkAPI.rejectWithValue(msg);
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      }
+      throw error;
     }
   }
 );
@@ -59,8 +77,17 @@ export const updateUser = createAsyncThunk<void, IUserData>(
 
       return resp.data;
     } catch (error) {
-      const { msg } = error.respone.data;
-      return thunkAPI.rejectWithValue(msg);
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      }
+      // unhandled non-AxiosError goes here
+      throw error;
     }
   }
 );

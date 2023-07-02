@@ -16,6 +16,7 @@ export interface IFormRow {
 // User Slice Types
 export interface IUserSliceInitialState {
   isLoading: boolean;
+  isSidebarOpen: boolean;
   user: null;
 }
 export interface IUserSlice {

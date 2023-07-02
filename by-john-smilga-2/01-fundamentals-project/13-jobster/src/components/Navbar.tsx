@@ -3,18 +3,19 @@ import Wrapper from "../assets/wrappers/Navbar";
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../store";
 import { Logo } from "./";
+import { toggleSidebar } from "../features/user/userSlice";
 
 const Navbar: React.FC = () => {
   const { user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+
+  const toggle = () => {
+    dispatch(toggleSidebar());
+  };
   return (
     <Wrapper>
       <div className="nav-center">
-        <button
-          type="button"
-          className="toggle-btn"
-          onClick={() => console.log("toggle sidebar")}
-        >
+        <button type="button" className="toggle-btn" onClick={toggle}>
           <FaAlignLeft />
         </button>
         <div>

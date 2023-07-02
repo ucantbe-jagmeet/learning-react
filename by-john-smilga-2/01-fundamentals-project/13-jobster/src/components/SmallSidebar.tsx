@@ -1,11 +1,10 @@
 import React from "react";
 import Wrapper from "../assets/wrappers/SmallSidebar";
 import { FaTimes } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import { useAppDispatch, useAppSelector } from "../store";
 import { toggleSidebar } from "../features/user/userSlice";
-import links from "../utils/links";
+import NavLinks from "./NavLinks";
 
 const SmallSidebar: React.FC = () => {
   const { isSidebarOpen } = useAppSelector((store) => store.user);
@@ -30,23 +29,7 @@ const SmallSidebar: React.FC = () => {
             <header>
               <Logo />
             </header>
-            <div className="nav-links">
-              {links.map((link) => {
-                const { text, path, id, icon } = link;
-                return (
-                  <NavLink
-                    key={id}
-                    to={path}
-                    className={({ isActive }) =>
-                      isActive ? " nav-link active" : "nav-link"
-                    }
-                  >
-                    <span className="icon">{icon}</span>
-                    {text}
-                  </NavLink>
-                );
-              })}
-            </div>
+            <NavLinks />
           </div>
         </div>
       </Wrapper>

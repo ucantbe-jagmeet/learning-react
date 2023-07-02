@@ -1,7 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
+import Wrapper from "../../assets/wrappers/DashboardFormPage";
+import { toast } from "react-toastify";
+import { useAppSelector } from "../../store";
+import { useDispatch } from "react-redux";
+import { IUser } from "../../types";
+import { FormRow } from "../../components";
 
 const Profile: React.FC = () => {
-  return <div>Profile</div>;
+  const { isLoading, user } = useAppSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  const [userData, setUserData] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    lastName: user?.lastName || "",
+    location: user?.location || "",
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { name, email, lastName, location } = userData;
+    if (!name || !email || !lastName || !location) {
+      toast.error("Please fill out all feilds");
+      return;
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  return (
+    <Wrapper>
+      <form className="form" onSubmit={handleSubmit}>
+        <h3>Profile</h3>
+        <div className="form-center">
+          <FormRow
+            type="text"
+            name="name"
+            value={userData.name}
+            handleChange={handleChange}
+            labelText="Name"
+          />
+          <FormRow
+            type="text"
+            name="lastname"
+            value={userData.lastName}
+            handleChange={handleChange}
+            labelText="Last Name"
+          />
+          <FormRow
+            type="text"
+            name="email"
+            value={userData.email}
+            handleChange={handleChange}
+            labelText="Email"
+          />
+          <FormRow
+            type="text"
+            name="Location"
+            value={userData.location}
+            handleChange={handleChange}
+            labelText="Location"
+          />
+          <button type="submit" className="btn btn-block" disabled={isLoading}>
+            {isLoading ? "Please wait..." : "Save Changes"}
+          </button>
+        </div>
+      </form>
+    </Wrapper>
+  );
 };
 
 export default Profile;

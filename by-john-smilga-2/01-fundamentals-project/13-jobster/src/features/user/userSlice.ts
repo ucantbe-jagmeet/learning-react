@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import { ToastContent, toast } from "react-toastify";
 import {
   ILoginUser,
   IRegisterUser,
   IUserSliceInitialState,
   IUserData,
-  IUser,
   RootStateType,
 } from "../../types";
 import customFetch from "../../utils/axios";
@@ -118,7 +117,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        toast.error(payload as ToastContent<unknown>);
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -132,7 +131,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        toast.error(payload as ToastContent<unknown>);
       })
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
@@ -146,7 +145,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        toast.error(payload as ToastContent<unknown>);
       });
   },
 });

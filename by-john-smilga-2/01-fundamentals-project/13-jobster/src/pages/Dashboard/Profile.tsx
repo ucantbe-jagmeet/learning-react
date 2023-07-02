@@ -3,7 +3,7 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../store";
 import { useDispatch } from "react-redux";
-import { IUser, IUserData } from "../../types";
+import { IUserData } from "../../types";
 import { FormRow } from "../../components";
 import { updateUser } from "../../features/user/userSlice";
 import { AnyAction } from "@reduxjs/toolkit";

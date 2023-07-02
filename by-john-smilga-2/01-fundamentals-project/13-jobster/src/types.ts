@@ -63,6 +63,7 @@ export interface IUserData {
   email: string | "";
   lastName: string | "";
   location: string | "";
+  token?: string;
 }
 
 export interface RootStateType {

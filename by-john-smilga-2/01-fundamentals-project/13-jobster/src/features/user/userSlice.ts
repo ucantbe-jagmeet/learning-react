@@ -6,6 +6,7 @@ import {
   IUserSliceInitialState,
   IUserData,
   IUser,
+  RootStateType,
 } from "../../types";
 import customFetch from "../../utils/axios";
 import {
@@ -64,14 +65,13 @@ export const loginUser = createAsyncThunk<void, ILoginUser>(
 );
 export const updateUser = createAsyncThunk<void, IUserData>(
   "user/updateUser",
-  async (user, thunkAPI) => {
-    const currentState: { user: IUser } = thunkAPI.getState();
-    console.log(currentState);
-
+  async (user, { rejectWithValue, getState }) => {
+    const currentState: { user: IUserData } = (getState() as RootStateType)
+      .auth;
     try {
-      const resp = await customFetch.post("/auth/updateUser", user, {
+      const resp = await customFetch.patch("/auth/updateUser", user, {
         headers: {
-          Authorization: `Bearer ${currentState?.user.user.token}`,
+          Authorization: `Bearer ${currentState?.user.token}`,
         },
       });
 
@@ -84,9 +84,8 @@ export const updateUser = createAsyncThunk<void, IUserData>(
             error.response.data.message) ||
           error.message ||
           error.toString();
-        return thunkAPI.rejectWithValue(message);
+        return rejectWithValue(message);
       }
-      // unhandled non-AxiosError goes here
       throw error;
     }
   }

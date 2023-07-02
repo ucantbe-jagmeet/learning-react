@@ -64,3 +64,9 @@ export interface IUserData {
   lastName: string | "";
   location: string | "";
 }
+
+export interface RootStateType {
+  auth: {
+    user: IUserData;
+  };
+}

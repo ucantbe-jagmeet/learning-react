@@ -1,6 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ToastContent, toast } from "react-toastify";
-import { ILoginUser, IRegisterUser, IUserSliceInitialState } from "../../types";
+import {
+  ILoginUser,
+  IRegisterUser,
+  IUserSliceInitialState,
+  IUserData,
+  IUser,
+} from "../../types";
 import customFetch from "../../utils/axios";
 import {
   addUserToLocalStorage,
@@ -38,6 +44,26 @@ export const loginUser = createAsyncThunk<void, ILoginUser>(
     }
   }
 );
+export const updateUser = createAsyncThunk<void, IUserData>(
+  "user/updateUser",
+  async (user, thunkAPI) => {
+    const currentState: { user: IUser } = thunkAPI.getState();
+    console.log(currentState);
+
+    try {
+      const resp = await customFetch.post("/auth/updateUser", user, {
+        headers: {
+          Authorization: `Bearer ${currentState?.user.user.token}`,
+        },
+      });
+
+      return resp.data;
+    } catch (error) {
+      const { msg } = error.respone.data;
+      return thunkAPI.rejectWithValue(msg);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -58,7 +84,6 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(registerUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
         const { user } = payload;
         state.isLoading = false;
         state.user = user;
@@ -73,7 +98,6 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
         const { user } = payload;
         state.isLoading = false;
         state.user = user;
@@ -81,6 +105,20 @@ const userSlice = createSlice({
         toast.success(`Welcome Back ${user.name}`);
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        const { user } = payload;
+        state.isLoading = false;
+        state.user = user;
+        addUserToLocalStorage(user);
+        toast.success(`User Updated`);
+      })
+      .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       });

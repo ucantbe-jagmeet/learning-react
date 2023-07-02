@@ -3,14 +3,16 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../store";
 import { useDispatch } from "react-redux";
-import { IUser } from "../../types";
+import { IUser, IUserData } from "../../types";
 import { FormRow } from "../../components";
+import { updateUser } from "../../features/user/userSlice";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const Profile: React.FC = () => {
   const { isLoading, user } = useAppSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<IUserData>({
     name: user?.name || "",
     email: user?.email || "",
     lastName: user?.lastName || "",
@@ -24,6 +26,10 @@ const Profile: React.FC = () => {
       toast.error("Please fill out all feilds");
       return;
     }
+    dispatch(
+      updateUser({ name, email, lastName, location }) as unknown as AnyAction
+    );
+    toast.success("User Updated");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +52,7 @@ const Profile: React.FC = () => {
           />
           <FormRow
             type="text"
-            name="lastname"
+            name="lastName"
             value={userData.lastName}
             handleChange={handleChange}
             labelText="Last Name"
@@ -60,7 +66,7 @@ const Profile: React.FC = () => {
           />
           <FormRow
             type="text"
-            name="Location"
+            name="location"
             value={userData.location}
             handleChange={handleChange}
             labelText="Location"

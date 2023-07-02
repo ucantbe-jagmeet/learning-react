@@ -57,3 +57,10 @@ export interface ILinks {
   path: string;
   icon: ReactNode;
 }
+
+export interface IUserData {
+  name: string | "";
+  email: string | "";
+  lastName: string | "";
+  location: string | "";
+}

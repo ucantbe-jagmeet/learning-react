@@ -77,3 +77,17 @@ export interface RootStateType {
     user: IUserData;
   };
 }
+
+// jobslice
+export interface IJobSliceInitialState {
+  isLoading: boolean;
+  position: string;
+  company: string;
+  jobLocation: string;
+  jobTypeOptions: string[];
+  jobType: string;
+  statusOptions: string[];
+  status: string;
+  isEditing: boolean;
+  editJobId: string;
+}

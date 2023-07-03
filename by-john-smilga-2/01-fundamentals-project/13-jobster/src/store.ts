@@ -1,10 +1,12 @@
 import { Store, configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import userSlice from "../src/features/user/userSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import jobSlice from "./features/job/jobSlice";
 
 export const store: Store = configureStore({
   reducer: {
     user: userSlice,
+    job: jobSlice,
   },
 });
 

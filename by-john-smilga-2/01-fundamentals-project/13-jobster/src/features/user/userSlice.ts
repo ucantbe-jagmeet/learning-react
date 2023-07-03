@@ -67,7 +67,7 @@ export const loginUser = createAsyncThunk<ILoginUser, Partial<ILoginUser>>(
 
 export const updateUser = createAsyncThunk<IUserData, Partial<IUserData>>(
   "user/updateUser",
-  async (user, { rejectWithValue, getState }) => {
+  async (user, { rejectWithValue, getState, dispatch }) => {
     // const currentState: { user: IUserData } = (getState() as RootStateType)
     //   .auth;
     try {
@@ -87,6 +87,10 @@ export const updateUser = createAsyncThunk<IUserData, Partial<IUserData>>(
             error.response.data.message) ||
           error.message ||
           error.toString();
+        if (error && error.response && error.response.status === 401) {
+          dispatch(logoutUser());
+          return rejectWithValue(`Unauthorized! logging out...`);
+        }
         return rejectWithValue(message);
       }
       throw error;

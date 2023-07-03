@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { toast } from "react-toastify";
-import { useAppSelector } from "../../store";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { IUserData } from "../../types";
 import { FormRow } from "../../components";
 import { updateUser } from "../../features/user/userSlice";
@@ -10,7 +9,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 
 const Profile: React.FC = () => {
   const { isLoading, user } = useAppSelector((store) => store.user);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [userData, setUserData] = useState<IUserData>({
     name: user?.name || "",
@@ -23,13 +22,17 @@ const Profile: React.FC = () => {
     e.preventDefault();
     const { name, email, lastName, location } = userData;
     if (!name || !email || !lastName || !location) {
-      toast.error("Please fill out all feilds");
+      toast.error("Please fill out all fields");
       return;
     }
     dispatch(
-      updateUser({ name, email, lastName, location }) as unknown as AnyAction
+      updateUser({
+        name,
+        email,
+        lastName,
+        location,
+      }) as unknown as AnyAction
     );
-    toast.success("User Updated");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

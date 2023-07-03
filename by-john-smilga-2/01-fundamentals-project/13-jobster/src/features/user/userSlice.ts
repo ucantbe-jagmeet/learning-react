@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ToastContent, toast } from "react-toastify";
+import { toast, ToastContent } from "react-toastify";
 import {
   ILoginUser,
   IRegisterUser,
@@ -14,6 +14,7 @@ import {
   removeUserToLocalStorage,
 } from "../../utils/localStorage";
 import { AxiosError } from "axios";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState: IUserSliceInitialState = {
   isLoading: false,
@@ -21,28 +22,29 @@ const initialState: IUserSliceInitialState = {
   user: getUserToLocalStorage(),
 };
 
-export const registerUser = createAsyncThunk<void, IRegisterUser>(
-  "user/registerUser",
-  async (user, thunkAPI) => {
-    try {
-      const resp = await customFetch.post("/auth/register", user);
-      return resp.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
-      }
-      // unhandled non-AxiosError goes here
-      throw error;
+export const registerUser = createAsyncThunk<
+  IRegisterUser,
+  Partial<IRegisterUser>
+>("user/registerUser", async (user, thunkAPI) => {
+  try {
+    const resp = await customFetch.post("/auth/register", user);
+    return resp.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
+    // unhandled non-AxiosError goes here
+    throw error;
   }
-);
-export const loginUser = createAsyncThunk<void, ILoginUser>(
+});
+
+export const loginUser = createAsyncThunk<ILoginUser, Partial<ILoginUser>>(
   "user/loginUser",
   async (user, thunkAPI) => {
     try {
@@ -62,18 +64,20 @@ export const loginUser = createAsyncThunk<void, ILoginUser>(
     }
   }
 );
-export const updateUser = createAsyncThunk<void, IUserData>(
+
+export const updateUser = createAsyncThunk<IUserData, Partial<IUserData>>(
   "user/updateUser",
   async (user, { rejectWithValue, getState }) => {
-    const currentState: { user: IUserData } = (getState() as RootStateType)
-      .auth;
+    // const currentState: { user: IUserData } = (getState() as RootStateType)
+    //   .auth;
     try {
       const resp = await customFetch.patch("/auth/updateUser", user, {
         headers: {
-          Authorization: `Bearer ${currentState?.user.token}`,
+          Authorization: `Bearer ${
+            (getState() as RootStateType).user?.user?.token
+          }`,
         },
       });
-
       return resp.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -111,13 +115,16 @@ const userSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, { payload }) => {
         const { user } = payload;
         state.isLoading = false;
-        state.user = user;
-        addUserToLocalStorage(user);
-        toast.success(`Hello there ${user.name}`);
+        if (user) {
+          state.user = user;
+          addUserToLocalStorage(user);
+          toast.success(`Hello there ${user.name}`);
+        }
       })
-      .addCase(registerUser.rejected, (state, { payload }) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
-        toast.error(payload as ToastContent<unknown>);
+        const toastContent: ToastContent = action.payload as ToastContent;
+        toast.error(toastContent);
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -125,13 +132,16 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         const { user } = payload;
         state.isLoading = false;
-        state.user = user;
-        addUserToLocalStorage(user);
-        toast.success(`Welcome Back ${user.name}`);
+        if (user) {
+          state.user = user;
+          addUserToLocalStorage(user);
+          toast.success(`Hello there ${user.name}`);
+        }
       })
-      .addCase(loginUser.rejected, (state, { payload }) => {
+      .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        toast.error(payload as ToastContent<unknown>);
+        const toastContent: ToastContent = action.payload as ToastContent;
+        toast.error(toastContent);
       })
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
@@ -139,13 +149,16 @@ const userSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, { payload }) => {
         const { user } = payload;
         state.isLoading = false;
-        state.user = user;
-        addUserToLocalStorage(user);
-        toast.success(`User Updated`);
+        if (user) {
+          state.user = user;
+          addUserToLocalStorage(user);
+          toast.success(`User Updated`);
+        }
       })
-      .addCase(updateUser.rejected, (state, { payload }) => {
+      .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
-        toast.error(payload as ToastContent<unknown>);
+        const toastContent: ToastContent = action.payload as ToastContent;
+        toast.error(toastContent);
       });
   },
 });

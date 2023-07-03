@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FormRow, Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-import { ILoginUser, IRegisterInitialState } from "../types";
+import { IRegisterInitialState } from "../types";
 import { toast } from "react-toastify";
-import { useAppSelector, useAppDispatch } from "../store";
+import { useAppSelector } from "../store";
 import { loginUser, registerUser } from "../features/user/userSlice";
 import { AnyAction } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const initialState = {
   name: "",
@@ -19,7 +20,7 @@ const Register: React.FC = () => {
   const [values, setValues] = useState<IRegisterInitialState>(initialState);
   const { user, isLoading } = useAppSelector((store) => store.user);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;

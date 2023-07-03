@@ -19,24 +19,13 @@ export interface IFormRow {
 export interface IUserSliceInitialState {
   isLoading: boolean;
   isSidebarOpen: boolean;
-  user: null;
+  user: IUser | null;
 }
 export interface IUserSlice {
   name: string;
   initialState: IUserSliceInitialState;
 }
 
-export interface ILoginUser {
-  email: string;
-  password: string;
-}
-export interface IRegisterUser {
-  name: string;
-  email: string;
-  password: string;
-}
-
-// user Type
 export interface IUser {
   email: string;
   lastName: string;
@@ -44,6 +33,20 @@ export interface IUser {
   name: string;
   token: string;
 }
+
+export interface ILoginUser {
+  email: string;
+  password: string;
+  user: IUser | null;
+}
+export interface IRegisterUser {
+  name: string;
+  email: string;
+  password: string;
+  user: IUser | null;
+}
+
+// user Type
 
 //  protected route
 export interface ProtectedRouteProps {
@@ -64,9 +67,12 @@ export interface IUserData {
   lastName: string | "";
   location: string | "";
   token?: string;
+  user?: IUser | null;
 }
 
 export interface RootStateType {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: any;
   auth: {
     user: IUserData;
   };

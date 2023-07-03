@@ -91,3 +91,11 @@ export interface IJobSliceInitialState {
   isEditing: boolean;
   editJobId: string;
 }
+
+export interface IFormRowSelect {
+  labelText: string;
+  name: string;
+  value: string;
+  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  list: string[];
+}

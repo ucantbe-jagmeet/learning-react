@@ -4,6 +4,8 @@ import { useAppSelector } from "../../store";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { FormRow } from "../../components";
+import { IJobSliceInitialState } from "../../types";
+import FormRowSelect from "../../components/FormRowSelect";
 
 const AddJob: React.FC = () => {
   const {
@@ -17,10 +19,8 @@ const AddJob: React.FC = () => {
     status,
     isEditing,
     editJobId,
-  } = useAppSelector((store) => store.job);
+  } = useAppSelector<IJobSliceInitialState>((store) => store.job);
   const dispatch = useDispatch();
-
-  console.log(isEditing);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +31,9 @@ const AddJob: React.FC = () => {
     }
   };
 
-  const handleJobInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleJobInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const name = e.target.name;
     const value = e.target.value;
     console.log(name, value);
@@ -66,7 +68,23 @@ const AddJob: React.FC = () => {
             handleChange={handleJobInput}
             labelText="Job Location"
           />
-          {/* position */}
+
+          {/* status */}
+          <FormRowSelect
+            name="status"
+            value={status}
+            handleChange={handleJobInput}
+            list={statusOptions}
+            labelText="Status"
+          />
+
+          <FormRowSelect
+            name="jobType"
+            labelText="job type"
+            value={jobType}
+            handleChange={handleJobInput}
+            list={jobTypeOptions}
+          />
 
           <div className="btn-container">
             <button

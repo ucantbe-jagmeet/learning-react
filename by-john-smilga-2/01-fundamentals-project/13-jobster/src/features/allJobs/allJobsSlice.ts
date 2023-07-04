@@ -12,7 +12,7 @@ const intialFiltersState = {
 };
 
 const initialState: IAllJobsSliceInitialState = {
-  isLoading: false,
+  isLoading: true,
   jobs: [],
   totalJobs: 0,
   numOfPages: 1,

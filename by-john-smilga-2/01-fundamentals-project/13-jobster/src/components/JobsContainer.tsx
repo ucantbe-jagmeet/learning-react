@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Wrapper from "../assets/wrappers/JobsContainer";
 import { useAppDispatch, useAppSelector } from "../store";
-import { Job } from ".";
+import { Job, Loading } from ".";
 import { IAllJobsSliceInitialState } from "../@types";
 
 const JobsContainer: React.FC = () => {
@@ -13,7 +13,7 @@ const JobsContainer: React.FC = () => {
   if (isLoading) {
     return (
       <Wrapper>
-        <h2>Loading...</h2>
+        <Loading />
       </Wrapper>
     );
   }

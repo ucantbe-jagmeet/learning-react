@@ -27,7 +27,7 @@ const initialState: IAllJobsSliceInitialState = {
   monthlyApplications: [],
   ...intialFiltersState,
 };
-export const getAllJobs = createAsyncThunk<IGetAllJobs>(
+export const getAllJobs = createAsyncThunk<IAllJobsSliceInitialState>(
   "allJobs/getJobs",
   async (_, { rejectWithValue, getState, dispatch }) => {
     const url = `/jobs`;
@@ -58,7 +58,14 @@ export const getAllJobs = createAsyncThunk<IGetAllJobs>(
 const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
-  reducers: {},
+  reducers: {
+    showLoading: (state) => {
+      state.isLoading = true;
+    },
+    hideLoading: (state) => {
+      state.isLoading = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllJobs.pending, (state) => {
@@ -77,3 +84,4 @@ const allJobsSlice = createSlice({
 });
 
 export default allJobsSlice.reducer;
+export const { showLoading, hideLoading } = allJobsSlice.actions;

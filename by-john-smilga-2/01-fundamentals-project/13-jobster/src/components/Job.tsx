@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
 import { useAppDispatch } from "../store";
 import { IJobProps } from "../@types";
+import { JobInfo } from ".";
+import moment from "moment";
 
 const Job: React.FC<IJobProps> = ({
   _id,
@@ -15,6 +17,7 @@ const Job: React.FC<IJobProps> = ({
   status,
 }) => {
   const dispatch = useAppDispatch();
+  const date = moment(createdAt).format("MMM Do, YYYY");
   return (
     <Wrapper>
       <header>
@@ -26,7 +29,9 @@ const Job: React.FC<IJobProps> = ({
       </header>
       <div className="content">
         <div className="content-center">
-          <h4>more content</h4>
+          <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
+          <JobInfo icon={<FaCalendarAlt />} text={date} />
+          <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${status}`}>{status}</div>
         </div>
         <footer>

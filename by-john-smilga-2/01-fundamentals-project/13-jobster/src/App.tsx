@@ -2,7 +2,7 @@ import { ToastContainer } from "react-toastify";
 import { Landing, Register, Error, ProtectedRoute } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { AddJob, Profile, Stats } from "./pages/Dashboard";
+import { AddJob, AllJobs, Profile, Stats } from "./pages/Dashboard";
 import SharedLayout from "./pages/Dashboard";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
             }
           >
             <Route index element={<Stats />} />
-            <Route path="all-jobs" element={<Stats />} />
+            <Route path="all-jobs" element={<AllJobs />} />
             <Route path="add-job" element={<AddJob />} />
             <Route path="profile" element={<Profile />} />
           </Route>

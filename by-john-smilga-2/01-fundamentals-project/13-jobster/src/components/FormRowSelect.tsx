@@ -1,5 +1,5 @@
 import React from "react";
-import { IFormRowSelect } from "../types";
+import { IFormRowSelect } from "../@types";
 
 const FormRowSelect: React.FC<IFormRowSelect> = ({
   labelText,

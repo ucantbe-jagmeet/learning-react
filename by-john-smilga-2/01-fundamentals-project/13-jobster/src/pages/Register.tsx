@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FormRow, Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-import { IRegisterInitialState } from "../types";
+import { IRegisterInitialState } from "../@types";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../store";
 import { loginUser, registerUser } from "../features/user/userSlice";

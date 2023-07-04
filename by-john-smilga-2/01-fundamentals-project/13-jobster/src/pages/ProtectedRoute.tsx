@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../store";
-import { ProtectedRouteProps } from "../types";
+import { ProtectedRouteProps } from "../@types";
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,

@@ -6,7 +6,7 @@ import {
   IUserSliceInitialState,
   IUserData,
   RootStateType,
-} from "../../types";
+} from "../../@types";
 import customFetch from "../../utils/axios";
 import {
   addUserToLocalStorage,

@@ -12,7 +12,7 @@ export interface IFormRow {
   name: string;
   value: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  labelText: string;
+  labelText?: string;
 }
 
 // User Slice Types
@@ -79,7 +79,7 @@ export interface RootStateType {
 }
 
 // jobslice
-export interface IJobSliceInitialState {
+export type IJobSliceInitialState = {
   isLoading: boolean;
   position: string;
   company: string;
@@ -90,12 +90,19 @@ export interface IJobSliceInitialState {
   status: string;
   isEditing: boolean;
   editJobId: string;
-}
+};
 
 export interface IFormRowSelect {
-  labelText: string;
+  labelText?: string;
   name: string;
   value: string;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   list: string[];
 }
+
+export type IJobSliceInitialStateFieldPayload = {
+  [K in keyof IJobSliceInitialState]: {
+    key: K;
+    value: IJobSliceInitialState[K];
+  };
+}[keyof IJobSliceInitialState];

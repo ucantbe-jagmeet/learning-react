@@ -1,5 +1,5 @@
 import React from "react";
-import { IFormRow } from "../types";
+import { IFormRow } from "../@types";
 
 const FormRow: React.FC<IFormRow> = ({
   type,

@@ -1,11 +1,11 @@
 import React from "react";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
-import { useAppSelector } from "../../store";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { toast } from "react-toastify";
 import { FormRow } from "../../components";
-import { IJobSliceInitialState } from "../../types";
+import { IJobSliceInitialState } from "../../@types";
 import FormRowSelect from "../../components/FormRowSelect";
+import { handleChange, jobState } from "../../features/job/jobSlice";
 
 const AddJob: React.FC = () => {
   const {
@@ -20,7 +20,7 @@ const AddJob: React.FC = () => {
     isEditing,
     editJobId,
   } = useAppSelector<IJobSliceInitialState>((store) => store.job);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,9 +34,10 @@ const AddJob: React.FC = () => {
   const handleJobInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const name = e.target.name;
+    const key = e.target.name as keyof typeof jobState;
     const value = e.target.value;
-    console.log(name, value);
+    console.log(key, value);
+    dispatch(handleChange({ key, value }));
   };
 
   return (
@@ -75,7 +76,6 @@ const AddJob: React.FC = () => {
             value={status}
             handleChange={handleJobInput}
             list={statusOptions}
-            labelText="Status"
           />
 
           <FormRowSelect

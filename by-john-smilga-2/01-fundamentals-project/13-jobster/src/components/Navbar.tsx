@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
             <button
               type="button"
               className="dropdown-btn"
-              onClick={() => dispatch(logoutUser())}
+              onClick={() => dispatch(logoutUser("Logging out ..."))}
             >
               Logout
             </button>

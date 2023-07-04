@@ -26,6 +26,8 @@ const AddJob: React.FC = () => {
     isEditing,
     editJobId,
   } = useAppSelector<IJobSliceInitialState>((store) => store.job);
+  const { user } = useAppSelector((store) => store.user);
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

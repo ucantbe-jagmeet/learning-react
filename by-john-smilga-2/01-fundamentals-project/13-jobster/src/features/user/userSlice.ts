@@ -88,7 +88,7 @@ export const updateUser = createAsyncThunk<IUserData, Partial<IUserData>>(
           error.message ||
           error.toString();
         if (error && error.response && error.response.status === 401) {
-          dispatch(logoutUser());
+          dispatch(logoutUser("Unauthorized! logging out..."));
           return rejectWithValue(`Unauthorized! logging out...`);
         }
         return rejectWithValue(message);
@@ -102,10 +102,13 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logoutUser: (state) => {
+    logoutUser: (state, { payload }) => {
       state.user = null;
       state.isSidebarOpen = false;
       removeUserToLocalStorage();
+      if (payload) {
+        toast.success(payload);
+      }
     },
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;

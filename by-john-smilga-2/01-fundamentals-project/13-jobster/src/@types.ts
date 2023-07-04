@@ -126,6 +126,7 @@ export interface ISingleJob {
   createdBy: string;
   createdAt: string;
   updatedAt: string;
+  __v?: number;
 }
 export interface IAllJobsSliceInitialState {
   isLoading: boolean;
@@ -140,4 +141,18 @@ export interface IAllJobsSliceInitialState {
   searchType: string;
   sort: string;
   sortOptions: string[];
+}
+
+export interface IJobProps {
+  _id: string;
+  position: string;
+  company: string;
+  jobLocation: string;
+  jobType: string;
+  status: string;
+  createdAt: string;
+}
+
+export interface IGetAllJobs {
+  jobs: ISingleJob[];
 }

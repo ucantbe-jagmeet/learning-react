@@ -1,7 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import { ToastContent, toast } from "react-toastify";
 import customFetch from "../../utils/axios";
-import { IAllJobsSliceInitialState } from "../../@types";
+import {
+  IAllJobsSliceInitialState,
+  IGetAllJobs,
+  ISingleJob,
+  RootStateType,
+} from "../../@types";
+import { AxiosError } from "axios";
 
 const intialFiltersState = {
   search: "",
@@ -12,7 +18,7 @@ const intialFiltersState = {
 };
 
 const initialState: IAllJobsSliceInitialState = {
-  isLoading: true,
+  isLoading: false,
   jobs: [],
   totalJobs: 0,
   numOfPages: 1,
@@ -21,11 +27,53 @@ const initialState: IAllJobsSliceInitialState = {
   monthlyApplications: [],
   ...intialFiltersState,
 };
-
+export const getAllJobs = createAsyncThunk<IGetAllJobs>(
+  "allJobs/getJobs",
+  async (_, { rejectWithValue, getState, dispatch }) => {
+    const url = `/jobs`;
+    try {
+      const resp = await customFetch.get(url, {
+        headers: {
+          Authorization: `Bearer ${
+            (getState() as RootStateType).user?.user?.token
+          }`,
+        },
+      });
+      return resp.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return rejectWithValue(message);
+      }
+      // unhandled non-AxiosError goes here
+      throw error;
+    }
+  }
+);
 const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllJobs.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllJobs.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.jobs = action.payload.jobs;
+      })
+      .addCase(getAllJobs.rejected, (state, action) => {
+        state.isLoading = false;
+        const toastContent: ToastContent = action.payload as ToastContent;
+        toast.error(toastContent);
+      });
+  },
 });
 
 export default allJobsSlice.reducer;

@@ -3,12 +3,18 @@ import Wrapper from "../assets/wrappers/JobsContainer";
 import { useAppDispatch, useAppSelector } from "../store";
 import { Job, Loading } from ".";
 import { IAllJobsSliceInitialState } from "../@types";
+import { getAllJobs } from "../features/allJobs/allJobsSlice";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const JobsContainer: React.FC = () => {
   const { jobs, isLoading } = useAppSelector<IAllJobsSliceInitialState>(
     (store) => store.allJobs
   );
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllJobs() as unknown as AnyAction);
+  }, []);
 
   if (isLoading) {
     return (

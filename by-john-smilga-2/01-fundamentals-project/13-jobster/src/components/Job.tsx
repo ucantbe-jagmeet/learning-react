@@ -6,6 +6,7 @@ import { useAppDispatch } from "../store";
 import { IJobProps } from "../@types";
 import { JobInfo } from ".";
 import moment from "moment";
+import { deleteJob } from "../features/job/jobSlice";
 
 const Job: React.FC<IJobProps> = ({
   _id,
@@ -49,7 +50,7 @@ const Job: React.FC<IJobProps> = ({
               type="button"
               className="btn delete-btn"
               onClick={() => {
-                console.log("delete  job");
+                dispatch(deleteJob(_id));
               }}
             >
               Delete

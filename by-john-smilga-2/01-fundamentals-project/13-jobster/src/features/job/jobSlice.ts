@@ -1,10 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ToastContent, toast } from "react-toastify";
 import customFetch from "../../utils/axios";
-import {
-  addUserToLocalStorage,
-  getUserToLocalStorage,
-} from "../../utils/localStorage";
+import { showLoading, hideLoading, getAllJobs } from "../allJobs/allJobsSlice";
 import {
   ICreateJob,
   IJobSliceInitialState,
@@ -38,6 +35,37 @@ export const createJob = createAsyncThunk<ICreateJob, Partial<ICreateJob>>(
         },
       });
       dispatch(clearValues());
+      return resp.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return rejectWithValue(message);
+      }
+      // unhandled non-AxiosError goes here
+      throw error;
+    }
+  }
+);
+
+export const deleteJob = createAsyncThunk(
+  "job/deleteJob",
+  async (jobId, { rejectWithValue, getState, dispatch }) => {
+    const url = `/jobs/${jobId}`;
+    dispatch(showLoading());
+    try {
+      const resp = await customFetch.delete(url, {
+        headers: {
+          Authorization: `Bearer ${
+            (getState() as RootStateType).user?.user?.token
+          }`,
+        },
+      });
+      dispatch(getAllJobs());
       return resp.data;
     } catch (error) {
       if (error instanceof AxiosError) {

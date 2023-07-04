@@ -67,8 +67,11 @@ const jobSlice = createSlice({
         }
       }
     },
+    clearValues: () => {
+      return { ...jobState };
+    },
   },
 });
 
 export default jobSlice.reducer;
-export const { handleChange } = jobSlice.actions;
+export const { handleChange, clearValues } = jobSlice.actions;

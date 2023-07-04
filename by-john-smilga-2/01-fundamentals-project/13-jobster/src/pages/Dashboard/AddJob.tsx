@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 import { FormRow } from "../../components";
 import { IJobSliceInitialState } from "../../@types";
 import FormRowSelect from "../../components/FormRowSelect";
-import { handleChange, jobState } from "../../features/job/jobSlice";
+import {
+  handleChange,
+  jobState,
+  clearValues,
+} from "../../features/job/jobSlice";
 
 const AddJob: React.FC = () => {
   const {
@@ -90,7 +94,7 @@ const AddJob: React.FC = () => {
             <button
               type="button"
               className="btn btn-block clear-btn"
-              onClick={() => console.log("clear values")}
+              onClick={() => dispatch(clearValues())}
             >
               clear
             </button>

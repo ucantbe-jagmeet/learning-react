@@ -116,9 +116,20 @@ export interface ICreateJob {
   status: string;
 }
 
+export interface ISingleJob {
+  _id: string;
+  status: string;
+  jobType: string;
+  jobLocation: string;
+  position: string;
+  company: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface IAllJobsSliceInitialState {
   isLoading: boolean;
-  jobs: any[];
+  jobs: ISingleJob[];
   totalJobs: number;
   numOfPages: number;
   page: number;

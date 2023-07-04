@@ -9,7 +9,9 @@ import {
   handleChange,
   jobState,
   clearValues,
+  createJob,
 } from "../../features/job/jobSlice";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const AddJob: React.FC = () => {
   const {
@@ -33,6 +35,16 @@ const AddJob: React.FC = () => {
       toast.error("Please Fill Out All Fields");
       return;
     }
+
+    dispatch(
+      createJob({
+        position,
+        company,
+        jobLocation,
+        jobType,
+        status,
+      }) as unknown as AnyAction
+    );
   };
 
   const handleJobInput = (
@@ -41,7 +53,7 @@ const AddJob: React.FC = () => {
     const key = e.target.name as keyof typeof jobState;
     const value = e.target.value;
     console.log(key, value);
-    dispatch(handleChange({ key, value }));
+    dispatch(handleChange({ key, value }) as unknown as AnyAction);
   };
 
   return (

@@ -106,3 +106,11 @@ export type IJobSliceInitialStateFieldPayload = {
     value: IJobSliceInitialState[K];
   };
 }[keyof IJobSliceInitialState];
+
+export interface ICreateJob {
+  position: string;
+  company: string;
+  jobLocation: string;
+  jobType: string;
+  status: string;
+}

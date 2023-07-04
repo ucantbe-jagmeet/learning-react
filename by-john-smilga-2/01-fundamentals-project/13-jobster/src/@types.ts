@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from "react";
 
 // Register Page types
@@ -113,4 +114,19 @@ export interface ICreateJob {
   jobLocation: string;
   jobType: string;
   status: string;
+}
+
+export interface IAllJobsSliceInitialState {
+  isLoading: boolean;
+  jobs: any[];
+  totalJobs: number;
+  numOfPages: number;
+  page: number;
+  stats: Record<string, any>;
+  monthlyApplications: any[];
+  search: string;
+  searchStatus: string;
+  searchType: string;
+  sort: string;
+  sortOptions: string[];
 }

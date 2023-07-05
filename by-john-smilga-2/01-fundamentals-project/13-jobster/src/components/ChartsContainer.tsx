@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAppSelector } from "../store";
+import { AreaChart, BarChart } from ".";
+import Wrapper from "../assets/wrappers/ChartsContainer";
 
 const ChartsContainer = () => {
-  return <div>ChartsContainer</div>;
+  const [barChart, setBarChart] = useState(true);
+  const { monthlyApplications: data } = useAppSelector(
+    (store) => store.allJobs
+  );
+  return (
+    <Wrapper>
+      <h4>Monthly Applications</h4>
+      <button type="button" onClick={() => setBarChart(!barChart)}>
+        {barChart ? "Area Chart" : "Bar Chart"}
+      </button>
+      {barChart ? <BarChart data={data} /> : <AreaChart data={data} />}
+    </Wrapper>
+  );
 };
-
 export default ChartsContainer;

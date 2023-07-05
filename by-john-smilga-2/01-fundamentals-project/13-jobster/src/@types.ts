@@ -165,3 +165,7 @@ export interface IJob {
   jobId: string;
   job: IJobProps;
 }
+
+export interface IChartsData {
+  data: any;
+}

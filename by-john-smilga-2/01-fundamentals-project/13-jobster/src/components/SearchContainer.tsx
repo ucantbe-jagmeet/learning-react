@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import { FormRow, FormRowSelect } from ".";
 import Wrapper from "../assets/wrappers/SearchContainer";
 import { useAppSelector, useAppDispatch } from "../store";
-
+import { handleChange, clearFilters } from "../features/allJobs/allJobsSlice";
 const SearchContainer = () => {
   const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
     useAppSelector((store) => store.allJobs);
@@ -13,10 +13,12 @@ const SearchContainer = () => {
   const handleSearch = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    console.log("handleSearch occurs", e);
+    if (isLoading) return;
+    dispatch(handleChange({ name: e.target.name, value: e.target.value }));
   };
   const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    dispatch(clearFilters());
   };
   return (
     <Wrapper>

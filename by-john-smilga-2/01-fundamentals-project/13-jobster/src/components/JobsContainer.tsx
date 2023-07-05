@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Wrapper from "../assets/wrappers/JobsContainer";
 import { useAppDispatch, useAppSelector } from "../store";
 import { Job, Loading } from ".";
 import { IAllJobsSliceInitialState } from "../@types";
 import { getAllJobs } from "../features/allJobs/allJobsSlice";
 import { AnyAction } from "@reduxjs/toolkit";
+import PageBtnContainer from "./PageBtnContainer";
 
-const JobsContainer: React.FC = () => {
+const JobsContainer = () => {
   const { jobs, isLoading, page, totalJobs, numOfPages } =
     useAppSelector<IAllJobsSliceInitialState>((store) => store.allJobs);
 

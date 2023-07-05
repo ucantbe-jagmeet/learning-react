@@ -11,7 +11,7 @@ const FormRow: React.FC<IFormRow> = ({
   return (
     <div className="form-row">
       <label htmlFor="name" className="form-label">
-        {labelText && name}
+        {labelText || name}
       </label>
       <input
         type={type}

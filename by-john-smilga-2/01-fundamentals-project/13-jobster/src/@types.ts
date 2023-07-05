@@ -128,10 +128,6 @@ export interface ISingleJob {
   updatedAt: string;
   __v?: number;
 }
-export interface IJob {
-  jobId: string;
-  job: IJobProps;
-}
 export interface IAllJobsSliceInitialState {
   isLoading: boolean;
   jobs: ISingleJob[];
@@ -164,4 +160,8 @@ export interface IGetAllJobs {
 
 export interface IDeleteJob {
   jobId: string;
+}
+export interface IJob {
+  jobId: string;
+  job: IJobProps;
 }

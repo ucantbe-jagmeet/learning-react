@@ -10,6 +10,7 @@ import {
   handleChange,
   createJob,
   editJob,
+  jobState,
 } from "../../features/job/jobSlice";
 import { AnyAction } from "@reduxjs/toolkit";
 
@@ -26,7 +27,6 @@ const AddJob: React.FC = () => {
     isEditing,
     editJobId,
   } = useAppSelector<IJobSliceInitialState>((store) => store.job);
-  const { user } = useAppSelector((store) => store.user);
 
   const dispatch = useAppDispatch();
 
@@ -35,6 +35,21 @@ const AddJob: React.FC = () => {
 
     if (!position || !company || !jobLocation) {
       toast.error("Please Fill Out All Fields");
+      return;
+    }
+    if (isEditing) {
+      dispatch(
+        editJob({
+          jobId: editJobId,
+          job: {
+            position,
+            company,
+            jobLocation,
+            jobType,
+            status,
+          },
+        }) as unknown as AnyAction
+      );
       return;
     }
 
@@ -57,25 +72,6 @@ const AddJob: React.FC = () => {
     console.log(key, value);
     dispatch(handleChange({ key, value }) as unknown as AnyAction);
   };
-
-  useEffect(() => {
-    if (isEditing) {
-      dispatch(
-        editJob({
-          jobId: editJobId,
-          job: {
-            position,
-            company,
-            jobLocation,
-            jobType,
-            status,
-          },
-        })
-      );
-      return;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Wrapper>

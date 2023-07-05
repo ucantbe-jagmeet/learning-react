@@ -92,7 +92,6 @@ export const editJob = createAsyncThunk<IJob, IJob>(
   "job/editJob",
   async ({ jobId, job }, { rejectWithValue, getState, dispatch }) => {
     const url = `/jobs/${jobId}`;
-    dispatch(showLoading());
     try {
       const resp = await customFetch.patch(url, job, {
         headers: {
@@ -101,6 +100,7 @@ export const editJob = createAsyncThunk<IJob, IJob>(
           }`,
         },
       });
+      dispatch(clearValues());
       return resp.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -184,12 +184,24 @@ const jobSlice = createSlice({
         const toastContent: ToastContent = action.payload as ToastContent;
         toast.error(toastContent);
       })
+      .addCase(deleteJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        toast.success("Job Deleted..");
+      })
+      .addCase(deleteJob.rejected, (state, action) => {
+        state.isLoading = false;
+        const toastContent: ToastContent = action.payload as ToastContent;
+        toast.error(toastContent);
+      })
       .addCase(editJob.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(editJob.fulfilled, (state, action) => {
         state.isLoading = false;
-        toast.success(" Job Modified...");
+        toast.success("Job Modified...");
       })
       .addCase(editJob.rejected, (state, action) => {
         state.isLoading = false;

@@ -6,7 +6,8 @@ import { useAppDispatch } from "../store";
 import { IJobProps } from "../@types";
 import { JobInfo } from ".";
 import moment from "moment";
-import { deleteJob } from "../features/job/jobSlice";
+import { AnyAction } from "@reduxjs/toolkit";
+import { setEditJob, deleteJob } from "../features/job/jobSlice";
 
 const Job: React.FC<IJobProps> = ({
   _id,
@@ -41,7 +42,16 @@ const Job: React.FC<IJobProps> = ({
               to="/add-job"
               className="btn edit-btn"
               onClick={() => {
-                console.log("edit job");
+                dispatch(
+                  setEditJob({
+                    editJobId: _id,
+                    position,
+                    company,
+                    jobLocation,
+                    jobType,
+                    status,
+                  })
+                );
               }}
             >
               Edit
@@ -50,7 +60,9 @@ const Job: React.FC<IJobProps> = ({
               type="button"
               className="btn delete-btn"
               onClick={() => {
-                dispatch(deleteJob(_id));
+                if (_id) {
+                  dispatch(deleteJob({ jobId: _id }) as unknown as AnyAction);
+                }
               }}
             >
               Delete

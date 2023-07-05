@@ -3,9 +3,14 @@ import { ToastContent, toast } from "react-toastify";
 import customFetch from "../../utils/axios";
 import { showLoading, hideLoading, getAllJobs } from "../allJobs/allJobsSlice";
 import {
+  IAllJobsSliceInitialState,
   ICreateJob,
+  IDeleteJob,
+  IJob,
+  IJobProps,
   IJobSliceInitialState,
   IJobSliceInitialStateFieldPayload,
+  ISingleJob,
   RootStateType,
 } from "../../@types";
 import { AxiosError } from "axios";
@@ -52,9 +57,9 @@ export const createJob = createAsyncThunk<ICreateJob, Partial<ICreateJob>>(
   }
 );
 
-export const deleteJob = createAsyncThunk(
+export const deleteJob = createAsyncThunk<IDeleteJob, IDeleteJob>(
   "job/deleteJob",
-  async (jobId, { rejectWithValue, getState, dispatch }) => {
+  async ({ jobId }, { rejectWithValue, getState, dispatch }) => {
     const url = `/jobs/${jobId}`;
     dispatch(showLoading());
     try {
@@ -66,6 +71,36 @@ export const deleteJob = createAsyncThunk(
         },
       });
       dispatch(getAllJobs());
+      return resp.data;
+    } catch (error) {
+      dispatch(hideLoading());
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return rejectWithValue(message);
+      }
+      // unhandled non-AxiosError goes here
+      throw error;
+    }
+  }
+);
+export const editJob = createAsyncThunk<IJob, IJob>(
+  "job/editJob",
+  async ({ jobId, job }, { rejectWithValue, getState, dispatch }) => {
+    const url = `/jobs/${jobId}`;
+    dispatch(showLoading());
+    try {
+      const resp = await customFetch.patch(url, job, {
+        headers: {
+          Authorization: `Bearer ${
+            (getState() as RootStateType).user?.user?.token
+          }`,
+        },
+      });
       return resp.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -131,6 +166,9 @@ const jobSlice = createSlice({
     clearValues: () => {
       return { ...jobState };
     },
+    setEditJob: (state, action: PayloadAction<IJobProps>) => {
+      return { ...state, isEditing: true, ...action.payload };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -145,9 +183,21 @@ const jobSlice = createSlice({
         state.isLoading = false;
         const toastContent: ToastContent = action.payload as ToastContent;
         toast.error(toastContent);
+      })
+      .addCase(editJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        toast.success(" Job Modified...");
+      })
+      .addCase(editJob.rejected, (state, action) => {
+        state.isLoading = false;
+        const toastContent: ToastContent = action.payload as ToastContent;
+        toast.error(toastContent);
       });
   },
 });
 
 export default jobSlice.reducer;
-export const { handleChange, clearValues } = jobSlice.actions;
+export const { handleChange, clearValues, setEditJob } = jobSlice.actions;

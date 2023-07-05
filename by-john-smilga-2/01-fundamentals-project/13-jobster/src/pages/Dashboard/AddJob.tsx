@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { toast } from "react-toastify";
@@ -6,10 +6,10 @@ import { FormRow } from "../../components";
 import { IJobSliceInitialState } from "../../@types";
 import FormRowSelect from "../../components/FormRowSelect";
 import {
-  handleChange,
-  jobState,
   clearValues,
+  handleChange,
   createJob,
+  editJob,
 } from "../../features/job/jobSlice";
 import { AnyAction } from "@reduxjs/toolkit";
 
@@ -57,6 +57,25 @@ const AddJob: React.FC = () => {
     console.log(key, value);
     dispatch(handleChange({ key, value }) as unknown as AnyAction);
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      dispatch(
+        editJob({
+          jobId: editJobId,
+          job: {
+            position,
+            company,
+            jobLocation,
+            jobType,
+            status,
+          },
+        })
+      );
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Wrapper>

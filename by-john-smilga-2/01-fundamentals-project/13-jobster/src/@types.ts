@@ -128,6 +128,10 @@ export interface ISingleJob {
   updatedAt: string;
   __v?: number;
 }
+export interface IJob {
+  jobId: string;
+  job: IJobProps;
+}
 export interface IAllJobsSliceInitialState {
   isLoading: boolean;
   jobs: ISingleJob[];
@@ -144,15 +148,20 @@ export interface IAllJobsSliceInitialState {
 }
 
 export interface IJobProps {
-  _id: string;
+  _id?: string;
+  editJobId?: string;
   position: string;
   company: string;
   jobLocation: string;
   jobType: string;
   status: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface IGetAllJobs {
   jobs: ISingleJob[];
+}
+
+export interface IDeleteJob {
+  jobId: string;
 }

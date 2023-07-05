@@ -10,8 +10,10 @@ import Navbar from "./Navbar";
 import SearchContainer from "./SearchContainer";
 import SmallSidebar from "./SmallSidebar";
 import StatsContainer from "./StatsContainer";
+import StatsItem from "./StatsItem";
 
 export {
+  StatsItem,
   ChartsContainer,
   StatsContainer,
   JobInfo,

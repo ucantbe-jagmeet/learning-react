@@ -55,6 +55,35 @@ export const getAllJobs = createAsyncThunk<IAllJobsSliceInitialState>(
     }
   }
 );
+
+export const showStats = createAsyncThunk(
+  "allJobs/showStats",
+  async (_, { rejectWithValue, getState }) => {
+    const url = `jobs/stats`;
+    try {
+      const resp = await customFetch.get(url, {
+        headers: {
+          Authorization: `Bearer ${
+            (getState() as RootStateType).user?.user?.token
+          }`,
+        },
+      });
+      return resp.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return rejectWithValue(message);
+      }
+      throw error;
+    }
+  }
+);
+
 const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
@@ -76,6 +105,19 @@ const allJobsSlice = createSlice({
         state.jobs = action.payload.jobs;
       })
       .addCase(getAllJobs.rejected, (state, action) => {
+        state.isLoading = false;
+        const toastContent: ToastContent = action.payload as ToastContent;
+        toast.error(toastContent);
+      })
+      .addCase(showStats.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(showStats.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.stats = action.payload.defaultStats;
+        state.monthlyApplications = action.payload.monthlyApplications;
+      })
+      .addCase(showStats.rejected, (state, action) => {
         state.isLoading = false;
         const toastContent: ToastContent = action.payload as ToastContent;
         toast.error(toastContent);

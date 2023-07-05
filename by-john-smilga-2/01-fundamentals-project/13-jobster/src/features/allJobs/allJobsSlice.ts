@@ -1,12 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ToastContent, toast } from "react-toastify";
 import customFetch from "../../utils/axios";
-import {
-  IAllJobsSliceInitialState,
-  IGetAllJobs,
-  ISingleJob,
-  RootStateType,
-} from "../../@types";
+import { IAllJobsSliceInitialState, RootStateType } from "../../@types";
 import { AxiosError } from "axios";
 
 const intialFiltersState = {
@@ -29,8 +24,15 @@ const initialState: IAllJobsSliceInitialState = {
 };
 export const getAllJobs = createAsyncThunk<IAllJobsSliceInitialState>(
   "allJobs/getJobs",
-  async (_, { rejectWithValue, getState, dispatch }) => {
-    const url = `/jobs`;
+  async (_, { rejectWithValue, getState }) => {
+    const { page, search, searchStatus, searchType, sort } = (
+      getState() as RootStateType
+    ).user.allJobs;
+
+    let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
+    if (search) {
+      url = url + `&search=${search}`;
+    }
     try {
       const resp = await customFetch.get(url, {
         headers: {
@@ -95,12 +97,16 @@ const allJobsSlice = createSlice({
       state.isLoading = false;
     },
     handleChange: (state, { payload: { name, value } }) => {
-      // state.page = 1;
+      state.page = 1;
       state[name] = value;
     },
     clearFilters: (state) => {
       return { ...state, ...intialFiltersState };
     },
+    changePage: (state, { payload }) => {
+      state.page = payload;
+    },
+    clearAllJobsState: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -135,5 +141,10 @@ const allJobsSlice = createSlice({
 });
 
 export default allJobsSlice.reducer;
-export const { showLoading, hideLoading, handleChange, clearFilters } =
-  allJobsSlice.actions;
+export const {
+  showLoading,
+  hideLoading,
+  handleChange,
+  clearFilters,
+  changePage,
+} = allJobsSlice.actions;

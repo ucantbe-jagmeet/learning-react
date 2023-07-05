@@ -8,14 +8,24 @@ import { AnyAction } from "@reduxjs/toolkit";
 import PageBtnContainer from "./PageBtnContainer";
 
 const JobsContainer = () => {
-  const { jobs, isLoading, page, totalJobs, numOfPages } =
-    useAppSelector<IAllJobsSliceInitialState>((store) => store.allJobs);
+  const {
+    jobs,
+    isLoading,
+    page,
+    totalJobs,
+    numOfPages,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+  } = useAppSelector<IAllJobsSliceInitialState>((store) => store.allJobs);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllJobs() as unknown as AnyAction);
-  }, []);
+    // eslint-disable-next-line
+  }, [page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return (

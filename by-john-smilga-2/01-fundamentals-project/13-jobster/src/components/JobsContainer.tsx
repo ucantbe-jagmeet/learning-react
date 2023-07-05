@@ -7,9 +7,9 @@ import { getAllJobs } from "../features/allJobs/allJobsSlice";
 import { AnyAction } from "@reduxjs/toolkit";
 
 const JobsContainer: React.FC = () => {
-  const { jobs, isLoading } = useAppSelector<IAllJobsSliceInitialState>(
-    (store) => store.allJobs
-  );
+  const { jobs, isLoading, page, totalJobs, numOfPages } =
+    useAppSelector<IAllJobsSliceInitialState>((store) => store.allJobs);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -34,12 +34,15 @@ const JobsContainer: React.FC = () => {
 
   return (
     <Wrapper>
-      <h5>Job Info</h5>
+      <h5>
+        {totalJobs} job{jobs.length > 1 && "s"} found
+      </h5>
       <div className="jobs">
         {jobs.map((job) => {
           return <Job key={job._id} {...job} />;
         })}
       </div>
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };

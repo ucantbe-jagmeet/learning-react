@@ -69,7 +69,6 @@ const AddJob: React.FC = () => {
   ) => {
     const key = e.target.name as keyof typeof jobState;
     const value = e.target.value;
-    console.log(key, value);
     dispatch(handleChange({ key, value }) as unknown as AnyAction);
   };
 
